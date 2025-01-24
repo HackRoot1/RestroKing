@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wishlist extends Model
 {
-    //
+    public function foods() {
+        $this->belongsTo(Food::class, 'food_id', 'id');
+    }
 }
