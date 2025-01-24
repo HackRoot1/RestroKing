@@ -217,26 +217,34 @@
 							<div class="tab-content">
 								<h3 class="m-b10">New Customer</h3>
 								<p class="m-b15">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-								<a class="btn btnhover" href="javascript:void(0);">Create An Account</a>
+								<a class="btn btnhover" href="{{ route('register.view') }}">Create An Account</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-12 m-b30">
 						<div class="p-a30 border-1 radius-sm">
 							<div class="tab-content tab-form nav">
-								<form id="login" class="tab-pane active col-12 p-a0 ">
+								<form id="login" action="{{ route('login.auth') }}" method="POST" class="tab-pane active col-12 p-a0 ">
+									@csrf
+									@method('POST')
 									<h3 class="m-b5">Login</h3>
 									<p>If you have an account with us, please log in.</p>
 									<div class="form-group">
 										<label >E-MAIL *</label>
-										<input name="dzName" required="" class="form-control" placeholder="Your Email Id" type="email">
+										<input name="email" value="{{ old('email') }}" required="" class="form-control" placeholder="Your Email Id" type="email">
 									</div>
+									@error('email')
+										{{ $message }}
+									@enderror
 									<div class="form-group">
 										<label>Password *</label>
-										<input name="dzName" required="" class="form-control " placeholder="Type Password" type="password">
+										<input name="password" required="" class="form-control " placeholder="Type Password" type="password">
 									</div>
+									@error('password')
+										{{ $message }}
+									@enderror
 									<div class="text-left">
-										<button class="btn btnhover m-r5">Login</button>
+										<button type="submit" class="btn btnhover m-r5">Login</button>
 										<a data-toggle="tab" href="#forgot-password" class="m-l5"><i class="fa fa-unlock-alt"></i> Forgot Password</a> 
 									</div>
 								</form>
