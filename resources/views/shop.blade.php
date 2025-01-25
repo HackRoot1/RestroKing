@@ -4,21 +4,7 @@
     <!-- Content -->
     <div class="page-content bg-white">
         <!-- inner page banner -->
-        <div class="dlab-bnr-inr overlay-black-middle bg-pt" style="background-image:url(images/banner/bnr3.jpg);">
-            <div class="container">
-                <div class="dlab-bnr-inr-entry">
-                    <h1 class="text-white">Shop Grid 3 Side Bar</h1>
-                    <!-- Breadcrumb row -->
-                    <div class="breadcrumb-row">
-                        <ul class="list-inline">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Shop Grid 3 Side Bar</li>
-                        </ul>
-                    </div>
-                    <!-- Breadcrumb row END -->
-                </div>
-            </div>
-        </div>
+        @include('layouts.banner', ['title' => 'Shop', 'image' => 'bnr3.jpg'])
         <!-- inner page banner END -->
         <!-- contact area -->
         <div class="section-full content-inner">
@@ -221,134 +207,25 @@
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <div class="row">
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item1.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Cup Cake</a></h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item2.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Pepperoni Pizza</a>
-                                        </h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
+                            @foreach ($foods as $food)
+                                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
+                                    <div class="item-box shop-item style2">
+                                        <div class="item-img">
+                                            <img src="images/product/item1.jpg" alt="">
+                                        </div>
+                                        <div class="item-info text-center">
+                                            <h4 class="item-title"><a
+                                                    href="{{ route('food.detail.view', Str::slug($food->name, '-')) }}">{{ $food->name }}</a></h4>
+                                            <h5 class="price text-primary">
+                                                <del>{{ $food->price }}</del><span>${{ number_format($food->price - $food->price * ($food->discount / 100), 2) }}</span>
+                                            </h5>
+                                            <div class="cart-btn"><a href="shop-product-details.html"
+                                                    class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
+                                                    Cart</a></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item3.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Burger</a></h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item4.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Chow Mein</a></h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item5.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Pepperoni Pizza</a>
-                                        </h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item6.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Chicken Breast</a></h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item7.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Kurkure</a></h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item8.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Burger</a></h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
-                                <div class="item-box shop-item style2">
-                                    <div class="item-img">
-                                        <img src="images/product/item1.jpg" alt="">
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a href="shop-product-details.html">Cup Cake</a></h4>
-                                        <h5 class="price text-primary"><del>45</del><span>$40</span></h5>
-                                        <div class="cart-btn"><a href="shop-product-details.html"
-                                                class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                Cart</a></div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -4,21 +4,7 @@
     <!-- Content -->
     <div class="page-content bg-white">
         <!-- inner page banner -->
-        <div class="dlab-bnr-inr overlay-black-middle" style="background-image:url(images/banner/bnr1.jpg);">
-            <div class="container">
-                <div class="dlab-bnr-inr-entry">
-                    <h1 class="text-white">Our Menu</h1>
-                    <!-- Breadcrumb row -->
-                    <div class="breadcrumb-row">
-                        <ul class="list-inline">
-                            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-                            <li>Our Menu</li>
-                        </ul>
-                    </div>
-                    <!-- Breadcrumb row END -->
-                </div>
-            </div>
-        </div>
+        @include('layouts.banner', ['title' => 'Our Menu', 'image' => 'bnr1.jpg'])
         <!-- inner page banner END -->
         <!-- contact area -->
         <div class="content-block">

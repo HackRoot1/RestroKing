@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ShoppingController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AuthMiddleware;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ShoppingController;
 
 Route::get('/', [UserController::class, 'home'])->name('home');
 
@@ -14,7 +15,11 @@ Route::get('/profile', [UserController::class, 'profileView'])->name('profile.vi
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/shop', [ShoppingController::class, 'shopView'])->name('shop.view');
-Route::get('/cart', [ShoppingController::class, 'cartView'])->name('cart.view');
+Route::get('/shop/{slug}', [ShoppingController::class, 'foodDetail'])->name('food.detail.view');
 Route::get('/orders', [ShoppingController::class, 'ordersView'])->name('orders.view');
 Route::get('/wishlist', [ShoppingController::class, 'wishlistsView'])->name('wishlist.view');
 Route::get('/menu', [ShoppingController::class, 'menuView'])->name('menu.view');
+
+Route::middleware(AuthMiddleware::class)->group(function() {
+    Route::get('/cart', [ShoppingController::class, 'cartView'])->name('cart.view');
+});
