@@ -71,6 +71,11 @@ class UserController extends Controller
         }
     }
 
+    public function profileView()
+    {
+        return view('profile');
+    }
+    
     public function logout()
     {
         Auth::logout();
