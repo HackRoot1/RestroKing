@@ -31,10 +31,10 @@
  <![endif]-->
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/templete.css') }}">
-    <link class="skin" rel="stylesheet" type="text/css" href="{{ asset('css/skin/skin-2.css') }}">
+    <link rel="stylesheet" type="text/css" href="css/plugins.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/templete.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="css/skin/skin-2.css">
 
 </head>
 
@@ -248,19 +248,19 @@
         <button class="scroltop icon-up" type="button"><i class="fa fa-arrow-up"></i></button>
     </div>
     <!-- JAVASCRIPT FILES ========================================= -->
-    <script src="{{ asset('js/jquery.min.js') }}"></script><!-- JQUERY.MIN JS -->
-    <script src="{{ asset('plugins/bootstrap/js/popper.min.js') }}"></script><!-- BOOTSTRAP.MIN JS -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script><!-- BOOTSTRAP.MIN JS -->
-    <script src="{{ asset('plugins/bootstrap-select/bootstrap-select.min.js') }}"></script><!-- FORM JS -->
-    <script src="{{ asset('plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js') }}"></script><!-- FORM JS -->
+    <script src="js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
+    <script src="plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="plugins/bootstrap-select/bootstrap-select.min.js"></script><!-- FORM JS -->
+    <script src="plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
 
-    <script src="{{ asset('plugins/counter/waypoints-min.js') }}"></script><!-- WAYPOINTS JS -->
-    <script src="{{ asset('plugins/counter/counterup.min.js') }}"></script><!-- COUNTERUP JS -->
-    <script src="{{ asset('plugins/owl-carousel/owl.carousel.js') }}"></script><!-- OWL SLIDER -->
-    <script src="{{ asset('plugins/lightgallery/js/lightgallery-all.min.js') }}"></script><!-- LIGHTGALLERY -->
-    <script src="{{ asset('plugins/rangeslider/rangeslider.js') }}"></script><!-- Rangeslider -->
-    <script src="{{ asset('js/dz.carousel.js') }}"></script><!-- SORTCODE FUCTIONS  -->
-    <script src="{{ asset('js/dz.ajax.js') }}"></script><!-- CONTACT JS  -->
+    <script src="plugins/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
+    <script src="plugins/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
+    <script src="plugins/owl-carousel/owl.carousel.js"></script><!-- OWL SLIDER -->
+    <script src="plugins/lightgallery/js/lightgallery-all.min.js"></script><!-- LIGHTGALLERY -->
+    <script src="plugins/rangeslider/rangeslider.js"></script><!-- Rangeslider -->
+    <script src="js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS  -->
+    <script src="js/dz.ajax.js"></script><!-- CONTACT JS  -->
     
     {{-- <script src="plugins/switcher/switcher.js"></script><!-- CUSTOM FUCTIONS  --> --}}
     <script src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
