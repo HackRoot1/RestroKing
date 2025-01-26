@@ -34,8 +34,8 @@
                                             <td class="product-item-price">${{ $item->foodslist->price }}</td>
                                             <td class="product-item-quantity">
                                                 <div class="quantity btn-quantity max-w80">
-                                                    <input id="demo_vertical2" type="text" value="1"
-                                                        name="demo_vertical2" />
+                                                    <input id="productQuantity" type="text" value="1"
+                                                        name="productQuantity" />
                                                 </div>
                                             </td>
                                             <td class="product-item-totle">

@@ -161,35 +161,20 @@
                                 <tr>
                                     <th>IMAGE</th>
                                     <th>PRODUCT NAME</th>
+                                    <th>TOPPINGS</th>
+                                    <th>SIZE</th>
                                     <th>TOTAL</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><img src="images/product/item1.jpg" alt=""></td>
-                                    <td>Cup Cake</td>
-                                    <td class="product-price">$28.00</td>
+                                    <td>{{ $food->name }}</td>
+                                    <td>{{ $orderedFood['toppings'] }}</td>
+                                    <td>{{ $orderedFood['size'] }}</td>
+                                    <td class="product-price">${{ $food->price * $orderedFood['productQuantity'] }}</td>
                                 </tr>
-                                <tr>
-                                    <td><img src="images/product/item2.jpg" alt=""></td>
-                                    <td>Pizza</td>
-                                    <td class="product-price">$36.00</td>
-                                </tr>
-                                <tr>
-                                    <td><img src="images/product/item3.jpg" alt=""></td>
-                                    <td>Burger</td>
-                                    <td class="product-price">$28.00</td>
-                                </tr>
-                                <tr>
-                                    <td><img src="images/product/item4.jpg" alt=""></td>
-                                    <td>Chow Mein</td>
-                                    <td class="product-price">$36.00</td>
-                                </tr>
-                                <tr>
-                                    <td><img src="images/product/item5.jpg" alt=""></td>
-                                    <td>Pizza</td>
-                                    <td class="product-price">$28.00</td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>

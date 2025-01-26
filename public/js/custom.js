@@ -146,9 +146,9 @@ var RestroKing = function(){
 	
 	/* handle Bootstrap Touch Spin ============ */
 	var handleBootstrapTouchSpin = function(){
-		if(jQuery("input[name='demo_vertical2']").length > 0)
+		if(jQuery("input[name='productQuantity']").length > 0)
 		{
-			jQuery("input[name='demo_vertical2']").TouchSpin({
+			jQuery("input[name='productQuantity']").TouchSpin({
 				  verticalbuttons: true,
 				  verticalupclass: 'ti-plus',
 				  verticaldownclass: 'ti-minus'

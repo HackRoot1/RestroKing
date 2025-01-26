@@ -77,6 +77,13 @@ class ShoppingController extends Controller
         return redirect()->back();
     }
 
+    public function chekoutOrderView(Request $request)
+    {
+        $orderedFood = $request->all();
+        $food = Foods::where('id', $request->food_id)->first();
+        return view('orders', compact('orderedFood', 'food'));
+    }
+
     public function menuView()
     {
         return view('menu');

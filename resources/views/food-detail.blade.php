@@ -28,7 +28,9 @@
                             </div>
                         </div>
                         <div class="col-lg-6 m-b30">
-                            <form method="post" class="cart sticky-top">
+                            <form method="POST" action="{{ route('chekout.order.view') }}" class="cart sticky-top">
+                                @csrf
+                                @method('POST')
                                 <div class="dlab-post-title">
                                     <h4 class="post-title">{{ $foods->name }}</h4>
                                     <p class="m-b10">{{ $foods->description }}</p>
@@ -63,39 +65,43 @@
                                         <h6>Product Size</h6>
                                         <div class="btn-group product-item-size" data-toggle="buttons">
                                             <label class="btn">
-                                                <input name="options" id="option7" type="radio"> Large
+                                                <input name="size" value="large" id="option7" type="radio"> Large
                                             </label>
                                             <label class="btn active">
-                                                <input name="options " id="option8" type="radio"> Medium
+                                                <input name="size" value="medium" checked id="option8" type="radio">
+                                                Medium
                                             </label>
                                             <label class="btn">
-                                                <input name="options" id="option9" type="radio"> Small
+                                                <input name="size" value="small" id="option9" type="radio"> Small
                                             </label>
                                         </div>
                                     </div>
                                     <div class="m-b30 col-md-5 col-sm-4">
                                         <h6>Select quantity</h6>
                                         <div class="quantity btn-quantity style-2">
-                                            <input id="demo_vertical2" type="text" value="1"
-                                                name="demo_vertical2" />
+                                            <input id="productQuantity" type="text" value="1"
+                                                name="productQuantity" />
                                         </div>
                                     </div>
                                     <div class="m-b30 col-md-12 col-sm-12">
                                         <h6>Add toppings </h6>
                                         <div class="btn-group product-item-size" data-toggle="buttons">
                                             <label class="btn">
-                                                <input name="options" id="veggies" type="radio"> Veggies
+                                                <input name="toppings" value="veggies" id="veggies" type="radio">
+                                                Veggies
                                             </label>
                                             <label class="btn active">
-                                                <input name="options " id="medium" type="radio"> Medium
+                                                <input name="toppings" value="medium" checked id="medium" type="radio">
+                                                Medium
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <a class="btn btnhover" href="{{ route('add.to.cart', $foods->id) }}">
+                                    <input name="food_id" value="{{ $foods->id }}" type="hidden"> Medium
                                     <i class="ti-shopping-cart"></i>Add To Cart
                                 </a>
-                                <button class="btn btnhover">Buy Now
+                                <button type="submit" class="btn btnhover">Buy Now
                                 </button>
                             </form>
                         </div>
