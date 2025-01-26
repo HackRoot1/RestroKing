@@ -52,6 +52,31 @@ class ShoppingController extends Controller
         return redirect()->back();
     }
 
+    public function deleteCartItem($id) {
+        $cartItem = Cart::find($id);
+        $cartItem->delete();
+
+        if (isset($cartItem)) {
+            flash()->success('Item deleted from cart Successfully');
+        } else {
+
+            flash()->error('Please Try again');
+        }
+        return redirect()->back();
+    }
+
+    public function deleteWishlistItem($id) {
+        $wishlistItem = Wishlist::find($id);
+        $wishlistItem->delete();
+
+        if (isset($wishlistItem)) {
+            flash()->success('Item deleted from wishlist Successfully');
+        } else {
+            flash()->error('Please Try again');
+        }
+        return redirect()->back();
+    }
+
     public function ordersView()
     {
         return view('orders');

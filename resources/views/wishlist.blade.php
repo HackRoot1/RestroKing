@@ -43,7 +43,7 @@
                                                     class="btn btnhover">Add To Cart</a>
                                             </td>
                                             <td class="product-item-close">
-                                                <a href="javascript:void(0);" data-dismiss="alert" aria-label="close"
+                                                <a href="{{ route('delete.from.wishlist', $item->id) }}" aria-label="close"
                                                     class="ti-close"></a>
                                             </td>
                                         </tr>
