@@ -58,7 +58,8 @@ class ShoppingController extends Controller
     }
     public function wishlistsView()
     {
-        return view('wishlist');
+        $wishlists = Wishlist::where('user_id', Auth::user()->id)->with('foodslist')->get();
+        return view('wishlist', compact('wishlists'));
     }
 
     public function addToWishlist($id)
