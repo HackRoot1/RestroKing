@@ -26,12 +26,11 @@
                                         <div class="acod-content">
                                             <div class="widget_services">
                                                 <ul>
-                                                    <li><a href="shop-cart.html">Veggie Supreme</a></li>
-                                                    <li><a href="shop-cart.html">The Funghi</a></li>
-                                                    <li><a href="shop-cart.html">Duck Prosciutto</a></li>
-                                                    <li><a href="shop-cart.html">Grilled Sausage</a></li>
-                                                    <li><a href="shop-cart.html">Burger</a></li>
-                                                    <li><a href="shop-cart.html">Brisket Onion</a></li>
+                                                    @foreach ($foodsCategories as $foodsCategory)
+                                                        <li><a
+                                                                href="{{ route('shop.view', $foodsCategory) }}">{{ $foodsCategory }}</a>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -211,22 +210,30 @@
                                 <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
                                     <div class="item-box shop-item style2">
                                         <div class="item-img">
-                                            <img src="images/product/item1.jpg" alt="">
+                                            <img src="{{ asset('images/product/item1.jpg') }}" alt="">
+                                            <span class="sale"><a href="{{ route('add.to.cart', $food->id) }}"> <i
+                                                        class="ti-shopping-cart"></i></a></span>
+                                            <div class="fav-btn"> <a href="#"><i class="ti-heart"></i></a></div>
                                         </div>
                                         <div class="item-info text-center">
                                             <h4 class="item-title"><a
-                                                    href="{{ route('food.detail.view', Str::slug($food->name, '-')) }}">{{ $food->name }}</a></h4>
+                                                    href="{{ route('food.detail.view', Str::slug($food->name, '-')) }}">{{ $food->name }}</a>
+                                            </h4>
                                             <h5 class="price text-primary">
                                                 <del>{{ $food->price }}</del><span>${{ number_format($food->price - $food->price * ($food->discount / 100), 2) }}</span>
                                             </h5>
-                                            <div class="cart-btn"><a href="shop-product-details.html"
-                                                    class="btn btnhover radius-xl"><i class="ti-shopping-cart"></i> Add To
-                                                    Cart</a></div>
+                                            <div class="cart-btn">
+                                                <a href="{{ route('food.detail.view', Str::slug($food->name, '-')) }}"
+                                                    class="btn btnhover radius-xl">
+                                                    Buy Now
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
+                        {{ $foods->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

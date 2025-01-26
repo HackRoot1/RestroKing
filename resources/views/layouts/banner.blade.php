@@ -1,4 +1,4 @@
-<div class="dlab-bnr-inr overlay-black-middle bg-pt" style="background-image:url(images/banner/{{ $image }});">
+<div class="dlab-bnr-inr overlay-black-middle bg-pt" style="background-image:url({{ asset('images/banner/' . $image) }});">
     <div class="container">
         <div class="dlab-bnr-inr-entry">
             <h1 class="text-white">{{ $title }}</h1>

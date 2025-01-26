@@ -25,16 +25,11 @@
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--[if lt IE 9]>
- <script src="js/html5shiv.min.js"></script>
- <script src="js/respond.min.js"></script>
- <![endif]-->
-
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" type="text/css" href="css/plugins.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/templete.css">
-    <link class="skin" rel="stylesheet" type="text/css" href="css/skin/skin-2.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/templete.css') }}">
+    <link class="skin" rel="stylesheet" type="text/css" href="{{ asset('css/skin/skin-2.css') }}">
 
 </head>
 
@@ -57,7 +52,7 @@
                     <div class="container clearfix">
                         <!-- website logo -->
                         <div class="logo-header mostion">
-                            <a href="index.html" class="dez-page"><img src="images/logo-2.png" alt=""></a>
+                            <a href="index.html" class="dez-page"><img src="{{ asset('images/logo-2.png') }}" alt=""></a>
                         </div>
                         <!-- nav toggle button -->
                         <button class="navbar-toggler collapsed navicon justify-content-end" type="button"
@@ -70,7 +65,7 @@
                         <!-- main nav -->
                         <div class="header-nav navbar-collapse collapse justify-content-between" id="navbarNavDropdown">
                             <div class="logo-header mostion">
-                                <a href="index.html" class="dez-page"><img src="images/logo-2.png" alt=""></a>
+                                <a href="index.html" class="dez-page"><img src="{{ asset('images/logo-2.png') }}" alt=""></a>
                             </div>
                             <ul class="nav navbar-nav nav1">
                                 <li class="active"><a href="{{ route('home') }}">Home</a>
@@ -117,7 +112,7 @@
         @yield('content')
 
         <!-- Footer -->
-        <footer class="site-footer " style="background-image: url(images/background/bg2.jpg); background-size: cover;">
+        <footer class="site-footer " style="background-image: url({{ asset('images/background/bg2.jpg') }}); background-size: cover;">
             <!-- Footer Top Part -->
             <div class="footer-top bg-line-top">
                 <div class="container">
@@ -151,7 +146,7 @@
                                 <div class="widget-post-bx">
                                     <div class="widget-post clearfix">
                                         <div class="dlab-post-media radius-sm">
-                                            <img src="images/blog/recent-blog/pic1.jpg" alt="">
+                                            <img src="{{ asset('images/blog/recent-blog/pic1.jpg') }}" alt="">
                                         </div>
                                         <div class="dlab-post-info">
                                             <div class="dlab-post-header">
@@ -168,7 +163,7 @@
                                     </div>
                                     <div class="widget-post clearfix">
                                         <div class="dlab-post-media radius-sm">
-                                            <img src="images/blog/recent-blog/pic2.jpg" alt="">
+                                            <img src="{{ asset('images/blog/recent-blog/pic2.jpg') }}" alt="">
                                         </div>
                                         <div class="dlab-post-info">
                                             <div class="dlab-post-header">
@@ -248,22 +243,21 @@
         <button class="scroltop icon-up" type="button"><i class="fa fa-arrow-up"></i></button>
     </div>
     <!-- JAVASCRIPT FILES ========================================= -->
-    <script src="js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
-    <script src="plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
-    <script src="plugins/bootstrap/js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
-    <script src="plugins/bootstrap-select/bootstrap-select.min.js"></script><!-- FORM JS -->
-    <script src="plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
-
-    <script src="plugins/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
-    <script src="plugins/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
-    <script src="plugins/owl-carousel/owl.carousel.js"></script><!-- OWL SLIDER -->
-    <script src="plugins/lightgallery/js/lightgallery-all.min.js"></script><!-- LIGHTGALLERY -->
-    <script src="plugins/rangeslider/rangeslider.js"></script><!-- Rangeslider -->
-    <script src="js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS  -->
-    <script src="js/dz.ajax.js"></script><!-- CONTACT JS  -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script><!-- JQUERY.MIN JS -->
+    <script src="{{ asset('plugins/bootstrap/js/popper.min.js') }}"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="{{ asset('plugins/bootstrap-select/bootstrap-select.min.js') }}"></script><!-- FORM JS -->
+    <script src="{{ asset('plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js') }}"></script><!-- FORM JS -->
+    <script src="{{ asset('plugins/counter/waypoints-min.js') }}"></script><!-- WAYPOINTS JS -->
+    <script src="{{ asset('plugins/counter/counterup.min.js') }}"></script><!-- COUNTERUP JS -->
+    <script src="{{ asset('plugins/owl-carousel/owl.carousel.js') }}"></script><!-- OWL SLIDER -->
+    <script src="{{ asset('plugins/lightgallery/js/lightgallery-all.min.js') }}"></script><!-- LIGHTGALLERY -->
+    <script src="{{ asset('plugins/rangeslider/rangeslider.js') }}"></script><!-- Rangeslider -->
+    <script src="{{ asset('js/dz.carousel.js') }}"></script><!-- SORTCODE FUCTIONS  -->
+    <script src="{{ asset('js/dz.ajax.js') }}"></script><!-- CONTACT JS  -->
     
     {{-- <script src="plugins/switcher/switcher.js"></script><!-- CUSTOM FUCTIONS  --> --}}
-    <script src="js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+    <script src="{{ asset('js/custom.js') }}"></script><!-- CUSTOM FUCTIONS  -->
 </body>
 
 <!-- Mirrored from restroking.dexignzone.com/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 09 Dec 2024 08:08:56 GMT -->
