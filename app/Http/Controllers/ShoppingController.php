@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Foods;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Flasher\Prime\FlasherInterface;
 
 class ShoppingController extends Controller
 {
@@ -42,10 +44,10 @@ class ShoppingController extends Controller
         $cart->save();
 
         if (isset($cart)) {
-            session()->flash('success', 'Item added to cart Successfully');
+            flash()->success('Item added to cart Successfully');
         } else {
 
-            session()->flash('error', 'Please Try again');
+            flash()->error('Please Try again');
         }
         return redirect()->back();
     }
@@ -58,6 +60,22 @@ class ShoppingController extends Controller
     {
         return view('wishlist');
     }
+
+    public function addToWishlist($id)
+    {
+        $wishlist = new Wishlist();
+        $wishlist->user_id = Auth::id();
+        $wishlist->food_id = $id;
+        $wishlist->save();
+
+        if (isset($wishlist)) {
+            flash()->success('Item added to wishlist Successfully');
+        } else {
+            flash()->error('error', 'Please Try again');
+        }
+        return redirect()->back();
+    }
+
     public function menuView()
     {
         return view('menu');

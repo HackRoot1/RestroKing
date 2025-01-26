@@ -213,7 +213,7 @@
                                             <img src="{{ asset('images/product/item1.jpg') }}" alt="">
                                             <span class="sale"><a href="{{ route('add.to.cart', $food->id) }}"> <i
                                                         class="ti-shopping-cart"></i></a></span>
-                                            <div class="fav-btn"> <a href="#"><i class="ti-heart"></i></a></div>
+                                            <div class="fav-btn"> <a href="{{ route('add.to.wishlist', $food->id) }}"><i class="ti-heart"></i></a></div>
                                         </div>
                                         <div class="item-info text-center">
                                             <h4 class="item-title"><a

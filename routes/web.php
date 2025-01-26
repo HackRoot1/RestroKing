@@ -17,10 +17,11 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/shop/{category?}', [ShoppingController::class, 'shopView'])->name('shop.view');
 Route::get('/food/{slug}', [ShoppingController::class, 'foodDetail'])->name('food.detail.view');
 Route::get('/orders', [ShoppingController::class, 'ordersView'])->name('orders.view');
-Route::get('/wishlist', [ShoppingController::class, 'wishlistsView'])->name('wishlist.view');
 Route::get('/menu', [ShoppingController::class, 'menuView'])->name('menu.view');
 
 Route::middleware(AuthMiddleware::class)->group(function() {
     Route::get('/cart', [ShoppingController::class, 'cartView'])->name('cart.view');
+    Route::get('/wishlist', [ShoppingController::class, 'wishlistsView'])->name('wishlist.view');
+    Route::get('/wishlist/{id}', [ShoppingController::class, 'addToWishlist'])->name('add.to.wishlist');
     Route::get('/cart/{id}', [ShoppingController::class, 'addToCart'])->name('add.to.cart');
 });
