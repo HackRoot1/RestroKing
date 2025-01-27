@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Foods;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -112,5 +113,26 @@ class ShoppingController extends Controller
     public function menuView()
     {
         return view('menu');
+    }
+
+
+
+
+
+    // API Request 
+    public function checkCoupon(Request $request) {
+        $coupon = Coupon::where('coupon_code', $request->couponCode)->first();
+
+        if($coupon) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Coupon Applied',
+                'couponDiscount' => $coupon->discount,
+            ], 200);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => 'Coupon Expired Or Not Found',
+        ], 401);
     }
 }

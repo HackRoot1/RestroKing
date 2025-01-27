@@ -52,7 +52,9 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 m-b30">
-                        <form class="shop-form">
+                        <form class="shop-form" id="shop-form">
+                            @csrf
+                            @method('POST')
                             <h3>Calculate Shipping</h3>
                             <div class="form-group">
                                 <select>
@@ -71,10 +73,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Coupon Code">
+                                <input type="text" id="couponCode" class="form-control" placeholder="Coupon Code">
                             </div>
                             <div class="form-group">
-                                <button class="btn btnhover" type="button">Apply Coupon</button>
+                                <button class="btn btnhover" type="submit">Apply Coupon</button>
                             </div>
                         </form>
                     </div>
@@ -84,7 +86,7 @@
                             <tbody>
                                 <tr>
                                     <td>Order Subtotal</td>
-                                    <td id="orderSubtotal">$125.96</td>
+                                    <td id="orderSubtotal">125.96</td>
                                 </tr>
                                 <tr>
                                     <td>Shipping</td>
@@ -124,7 +126,7 @@
                     $(row).find(".product-item-total").html(totalPrice);
                 });
             }
-            
+
             function orderSubTotal() {
                 let sum = 0;
                 $(".alert").map((index, row) => {
@@ -146,10 +148,44 @@
             orderSubTotal();
             orderTotal();
             $(".productQuantity").on("change", function() {
+                let couponCode = $("#couponCode").val();
+                if (couponCode) {
+                    $("#couponCode").val('');
+                    $("#couponPrice").text("Not Applied");
+                }
                 quantityPrice();
                 orderSubTotal();
                 orderTotal();
             });
+
+
+            $(document).on("submit", "#shop-form", function(e) {
+                e.preventDefault();
+                let couponCode = $("#couponCode").val();
+                if (couponCode != '') {
+                    $.ajax({
+                        url: '/checkCoupon',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            couponCode: couponCode
+                        }),
+                        success: function(response) {
+                            $("#couponPrice").text(response.message + " " + response
+                                .couponDiscount + "%")
+                            let subTotal = $("#orderSubtotal").text();
+                            let percentPrice = parseFloat((subTotal / 100) * response
+                                .couponDiscount);
+                            let total = parseFloat(subTotal - percentPrice);
+                            $("#orderTotal").text(total);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('Error' + xhr.responseText);
+                        }
+                    });
+                }
+            });
+
         });
     </script>
 @endsection

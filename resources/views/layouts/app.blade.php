@@ -14,6 +14,7 @@
     <meta property="og:description" content="RestroKing - Cakery & Bakery HTML5 Template" />
     <meta property="og:image" content="social-image.png" />
     <meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- FAVICONS ICON -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
@@ -52,7 +53,8 @@
                     <div class="container clearfix">
                         <!-- website logo -->
                         <div class="logo-header mostion">
-                            <a href="index.html" class="dez-page"><img src="{{ asset('images/logo-2.png') }}" alt=""></a>
+                            <a href="index.html" class="dez-page"><img src="{{ asset('images/logo-2.png') }}"
+                                    alt=""></a>
                         </div>
                         <!-- nav toggle button -->
                         <button class="navbar-toggler collapsed navicon justify-content-end" type="button"
@@ -65,14 +67,15 @@
                         <!-- main nav -->
                         <div class="header-nav navbar-collapse collapse justify-content-between" id="navbarNavDropdown">
                             <div class="logo-header mostion">
-                                <a href="index.html" class="dez-page"><img src="{{ asset('images/logo-2.png') }}" alt=""></a>
+                                <a href="index.html" class="dez-page"><img src="{{ asset('images/logo-2.png') }}"
+                                        alt=""></a>
                             </div>
                             <ul class="nav navbar-nav nav1">
                                 <li class="active"><a href="{{ route('home') }}">Home</a>
                                 </li>
                                 <li><a href="about-1.html">About Us</a></li>
                                 <li><a href="about-1.html">Contact Us</a></li>
-                           </ul>
+                            </ul>
                             <ul class="nav navbar-nav nav2">
 
                                 <li>
@@ -112,7 +115,8 @@
         @yield('content')
 
         <!-- Footer -->
-        <footer class="site-footer " style="background-image: url({{ asset('images/background/bg2.jpg') }}); background-size: cover;">
+        <footer class="site-footer "
+            style="background-image: url({{ asset('images/background/bg2.jpg') }}); background-size: cover;">
             <!-- Footer Top Part -->
             <div class="footer-top bg-line-top">
                 <div class="container">
@@ -146,7 +150,8 @@
                                 <div class="widget-post-bx">
                                     <div class="widget-post clearfix">
                                         <div class="dlab-post-media radius-sm">
-                                            <img src="{{ asset('images/blog/recent-blog/pic1.jpg') }}" alt="">
+                                            <img src="{{ asset('images/blog/recent-blog/pic1.jpg') }}"
+                                                alt="">
                                         </div>
                                         <div class="dlab-post-info">
                                             <div class="dlab-post-header">
@@ -163,7 +168,8 @@
                                     </div>
                                     <div class="widget-post clearfix">
                                         <div class="dlab-post-media radius-sm">
-                                            <img src="{{ asset('images/blog/recent-blog/pic2.jpg') }}" alt="">
+                                            <img src="{{ asset('images/blog/recent-blog/pic2.jpg') }}"
+                                                alt="">
                                         </div>
                                         <div class="dlab-post-info">
                                             <div class="dlab-post-header">
@@ -255,9 +261,16 @@
     <script src="{{ asset('plugins/rangeslider/rangeslider.js') }}"></script><!-- Rangeslider -->
     <script src="{{ asset('js/dz.carousel.js') }}"></script><!-- SORTCODE FUCTIONS  -->
     <script src="{{ asset('js/dz.ajax.js') }}"></script><!-- CONTACT JS  -->
-    
+
     {{-- <script src="plugins/switcher/switcher.js"></script><!-- CUSTOM FUCTIONS  --> --}}
     <script src="{{ asset('js/custom.js') }}"></script><!-- CUSTOM FUCTIONS  -->
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
     @yield('script')
 </body>
