@@ -258,6 +258,8 @@
     
     {{-- <script src="plugins/switcher/switcher.js"></script><!-- CUSTOM FUCTIONS  --> --}}
     <script src="{{ asset('js/custom.js') }}"></script><!-- CUSTOM FUCTIONS  -->
+
+    @yield('script')
 </body>
 
 <!-- Mirrored from restroking.dexignzone.com/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 09 Dec 2024 08:08:56 GMT -->

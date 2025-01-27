@@ -31,14 +31,14 @@
                                                 <img src="images/product/thumb/item1.jpg" alt="">
                                             </td>
                                             <td class="product-item-name">{{ $item->foodslist->name }}</td>
-                                            <td class="product-item-price">${{ $item->foodslist->price }}</td>
+                                            <td class="product-item-price">{{ $item->foodslist->price }}</td>
                                             <td class="product-item-quantity">
                                                 <div class="quantity btn-quantity max-w80">
-                                                    <input id="demo_vertical3" type="text" value="1"
-                                                        name="productQuantity" />
+                                                    <input id="demo_vertical3" class="productQuantity" type="text"
+                                                        value="1" name="productQuantity" />
                                                 </div>
                                             </td>
-                                            <td class="product-item-totle">${{ $item->foodslist->price }}</td>
+                                            <td class="product-item-total">{{ $item->foodslist->price }}</td>
                                             <td class="product-item-close">
                                                 <a href="{{ route('delete.from.cart', $item->id) }}" class="ti-close"></a>
                                             </td>
@@ -84,7 +84,7 @@
                             <tbody>
                                 <tr>
                                     <td>Order Subtotal</td>
-                                    <td>$125.96</td>
+                                    <td id="orderSubtotal">$125.96</td>
                                 </tr>
                                 <tr>
                                     <td>Shipping</td>
@@ -92,11 +92,11 @@
                                 </tr>
                                 <tr>
                                     <td>Coupon</td>
-                                    <td>$28.00</td>
+                                    <td id="couponPrice">Not Applied</td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
-                                    <td>$506.00</td>
+                                    <td id="orderTotal">$506.00</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -111,4 +111,45 @@
 
     </div>
     <!-- Content END-->
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            function quantityPrice() {
+                $(".alert").map((index, row) => {
+                    let price = parseFloat($(row).find(".product-item-price").text());
+                    let quantity = parseInt($(row).find(".productQuantity").val());
+                    let totalPrice = (price * quantity)
+                    $(row).find(".product-item-total").html(totalPrice);
+                });
+            }
+            
+            function orderSubTotal() {
+                let sum = 0;
+                $(".alert").map((index, row) => {
+                    let price = parseFloat($(row).find(".product-item-total").text());
+                    sum = parseFloat(sum + price);
+                });
+                $("#orderSubtotal").text(sum);
+            }
+
+            function orderTotal() {
+                let sum = 0;
+                let subTotal = $("#orderSubtotal").text();
+                let couponPrice = parseFloat($("#couponPrice").text()) || 0;
+                sum = parseFloat(subTotal - couponPrice);
+                $("#orderTotal").text(sum);
+            }
+
+            quantityPrice();
+            orderSubTotal();
+            orderTotal();
+            $(".productQuantity").on("change", function() {
+                quantityPrice();
+                orderSubTotal();
+                orderTotal();
+            });
+        });
+    </script>
 @endsection
