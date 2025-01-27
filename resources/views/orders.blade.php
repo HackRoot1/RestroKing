@@ -10,151 +10,10 @@
         <div class="section-full content-inner">
             <!-- Product -->
             <div class="container">
-                <form class="shop-form">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 m-b30">
-                            <h3>Billing & Shipping Address</h3>
-                            <div class="form-group">
-                                <select>
-                                    <option value="">Åland Islands</option>
-                                    <option value="">Afghanistan</option>
-                                    <option value="">Albania</option>
-                                    <option value="">Algeria</option>
-                                    <option value="">Andorra</option>
-                                    <option value="">Angola</option>
-                                    <option value="">Anguilla</option>
-                                    <option value="">Antarctica</option>
-                                    <option value="">Antigua and Barbuda</option>
-                                    <option value="">Argentina</option>
-                                    <option value="">Armenia</option>
-                                    <option value="">Aruba</option>
-                                    <option value="">Australia</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="First Name">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Last Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Company Name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Address">
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Apartment, suite, unit etc.">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Town / City">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="State / County">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Postcode / Zip">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <input type="email" class="form-control" placeholder="Email">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" placeholder="Phone">
-                                </div>
-                            </div>
-                            <h4 class="cp" data-toggle="collapse" data-target="#create-an-account">Create an account
-                                <i class="fa fa-angle-down"></i>
-                            </h4>
-                            <div id="create-an-account" class="collapse">
-                                <p>Create an account by entering the information below. If you are a returning customer
-                                    please login at the top of the page.</p>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12 m-b30 m-md-b0">
-                            <h3 class="cp" data-toggle="collapse" data-target="#different-address">Ship to a different
-                                address <i class="fa fa-angle-down"></i></h3>
-                            <div id="different-address" class="collapse">
-                                <p>If you have shopped with us before, please enter your details in the boxes below. If you
-                                    are a new customer please proceed to the Billing & Shipping section.</p>
-                                <div class="form-group">
-                                    <select>
-                                        <option value="">Åland Islands</option>
-                                        <option value="">Afghanistan</option>
-                                        <option value="">Albania</option>
-                                        <option value="">Algeria</option>
-                                        <option value="">Andorra</option>
-                                        <option value="">Angola</option>
-                                        <option value="">Anguilla</option>
-                                        <option value="">Antarctica</option>
-                                        <option value="">Antigua and Barbuda</option>
-                                        <option value="">Argentina</option>
-                                        <option value="">Armenia</option>
-                                        <option value="">Aruba</option>
-                                        <option value="">Australia</option>
-                                    </select>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="First Name">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Company Name">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Address">
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control"
-                                            placeholder="Apartment, suite, unit etc.">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="Town / City">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="State / County">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="Postcode / Zip">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <input type="email" class="form-control" placeholder="Email">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" placeholder="Phone">
-                                    </div>
-                                </div>
-                                <p>Create an account by entering the information below. If you are a returning customer
-                                    please login at the top of the page.</p>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </form>
                 <div class="dlab-divider bg-gray-dark text-gray-dark icon-center"><i
                         class="fa fa-circle bg-white text-gray-dark"></i></div>
-                <div class="row">
-                    <div class="col-lg-6">
+                <div class="row pb-4">
+                    <div class="col-lg-12">
                         <h3>Your Order</h3>
                         <table class="table-bordered check-tbl">
                             <thead>
@@ -163,6 +22,8 @@
                                     <th>PRODUCT NAME</th>
                                     <th>TOPPINGS</th>
                                     <th>SIZE</th>
+                                    <th>PRICE</th>
+                                    <th>QUANTITY</th>
                                     <th>TOTAL</th>
                                 </tr>
                             </thead>
@@ -172,57 +33,73 @@
                                     <td>{{ $food->name }}</td>
                                     <td>{{ $orderedFood['toppings'] }}</td>
                                     <td>{{ $orderedFood['size'] }}</td>
-                                    <td class="product-price">${{ $food->price * $orderedFood['productQuantity'] }}</td>
+                                    <td>{{ $food->price }}</td>
+                                    <td>{{ $orderedFood['productQuantity'] }}</td>
+                                    <td class="product-price">{{ $food->price * $orderedFood['productQuantity'] }}</td>
                                 </tr>
 
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-lg-6">
-                        <form class="shop-form">
-                            <h3>Order Total</h3>
-                            <table class="table-bordered check-tbl">
-                                <tbody>
-                                    <tr>
-                                        <td>Order Subtotal</td>
-                                        <td class="product-price">$125.96</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping</td>
-                                        <td>Free Shipping</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Coupon</td>
-                                        <td class="product-price">$28.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total</td>
-                                        <td class="product-price-total">$506.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <h4>Payment Method</h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 m-b30">
+                        <form class="shop-form" id="shop-form">
+                            @csrf
+                            @method('POST')
+                            <h3>Calculate Shipping</h3>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name on Card">
-                            </div>
-                            <div class="form-group">
-                                <select>
-                                    <option value="">Credit Card Type</option>
-                                    <option value="">Another option</option>
-                                    <option value="">A option</option>
-                                    <option value="">Potato</option>
+                                <select name="paymentMethod">
+                                    <option value="CCT" selected>Credit Card Type</option>
+                                    <option value="POD">Pay On Delivery</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Credit Card Number">
+                            <div class="row" id="cct-inputs">
+                                <div class="form-group col-lg-6">
+                                    <input type="text" name="credit-card-number" id="credit-card-number"
+                                        class="form-control" placeholder="Credit Card Number">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <input type="text" name="credit-card-verification" id="credit-card-verification"
+                                        class="form-control" placeholder="Card Verification Number">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Card Verification Number">
+                                <input type="text" id="couponCode" class="form-control"
+                                    placeholder="Coupon Code (Optional)">
+                                <span id="couponError" style="display: none"></span>
                             </div>
                             <div class="form-group">
-                                <button class="btn button-lg btnhover btn-block" type="button">Place Order Now </button>
+                                <button class="btn btnhover" type="submit">Apply Coupon</button>
                             </div>
                         </form>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <h3>Cart Subtotal</h3>
+                        <table class="table-bordered check-tbl">
+                            <tbody>
+                                <tr>
+                                    <td>Order Subtotal</td>
+                                    <td id="orderSubtotal">125.96</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td>Free Shipping</td>
+                                </tr>
+                                <tr>
+                                    <td>Coupon</td>
+                                    <td id="couponPrice">Not Applied</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td id="orderTotal">506.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <button class="btn btnhover" id="proceedCheckout" type="button">Proceed to Checkout</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -231,4 +108,114 @@
 
     </div>
     <!-- Content END-->
+@endsection
+
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+
+            function orderSubTotal() {
+                let price = parseFloat($(".product-price").text());
+                $("#orderSubtotal").text(price);
+            }
+
+            function orderTotal() {
+                let sum = 0;
+                let subTotal = $("#orderSubtotal").text();
+                let couponPrice = parseFloat($("#couponPrice").text()) || 0;
+                sum = parseFloat(subTotal - couponPrice);
+                $("#orderTotal").text(sum);
+            }
+
+            orderSubTotal();
+            orderTotal();
+
+            $(document).on("submit", "#shop-form", function(e) {
+                e.preventDefault();
+                let couponCode = $("#couponCode").val();
+                if (couponCode != '') {
+                    $.ajax({
+                        url: '/checkCoupon',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            couponCode: couponCode
+                        }),
+                        success: function(response) {
+                            $("#couponPrice").text(response.message + " " + response
+                                .couponDiscount + "%")
+                            let subTotal = $("#orderSubtotal").text();
+                            let percentPrice = parseFloat((subTotal / 100) * response
+                                .couponDiscount);
+                            let total = parseFloat(subTotal - percentPrice);
+                            $("#orderTotal").text(total);
+                        },
+                        error: function(xhr, status, error) {
+                            $("#couponError").show();
+                            setTimeout(() => {
+                                $("#couponError").hide();
+                            }, 5000);
+                            $("#couponError").html(xhr.responseJSON.message);
+                        }
+                    });
+                }
+            });
+
+            // Proceed To Checkout
+            function CheckPaymentType() {
+                let PaymentType = $("select[name='paymentMethod']").val();
+                if (PaymentType == 'POD') {
+                    $("#cct-inputs").hide();
+                } else if (PaymentType == 'CCT') {
+                    $("#cct-inputs").show();
+                }
+            };
+
+            $("select[name='paymentMethod']").on("change", function() {
+                CheckPaymentType();
+            });
+
+            CheckPaymentType();
+
+            $("#proceedCheckout").on("click", function() {
+                let PaymentType = $("select[name='paymentMethod']").val();
+
+                if (PaymentType == 'POD') {
+                    // Proceed further 
+                    alert("Ordered");
+                } else if (PaymentType == 'CCT') {
+                    let creditCardNumber = $("#credit-card-number").val();
+                    let cvv = $("#credit-card-verification").val();
+                    if (creditCardNumber != '' && cvv != '') {
+                        // proceed further 
+                        alert("Ordered");
+                    } else {
+                        alert("Something wrong");
+                    }
+                }
+            });
+
+            function makeOrder(orderData) {
+                $.ajax({
+                    url: '/makeOrder',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        orderData: orderData
+                    }),
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        // $("#couponError").show();
+                        // setTimeout(() => {
+                        //     $("#couponError").hide();
+                        // }, 5000);
+                        $("#couponError").html(xhr.responseJSON.message);
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

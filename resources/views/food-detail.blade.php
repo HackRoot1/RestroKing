@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <a class="btn btnhover" href="{{ route('add.to.cart', $foods->id) }}">
-                                    <input name="food_id" value="{{ $foods->id }}" type="hidden"> Medium
+                                    <input name="food_id" value="{{ $foods->id }}" type="hidden">
                                     <i class="ti-shopping-cart"></i>Add To Cart
                                 </a>
                                 <button type="submit" class="btn btnhover">Buy Now

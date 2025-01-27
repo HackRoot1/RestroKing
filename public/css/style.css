@@ -2236,7 +2236,7 @@ label {
     background-color: #fff !important;
     height: 45px;
     font-size: 15px;
-    color: #999;
+    color: #222;
     padding-left: 20px;
     border-radius: 6px !important;
 }
@@ -12638,7 +12638,7 @@ border: 0;
     text-align: center;
     min-width: 40px;
     margin-right: 4px;
-    color: #777;
+    color: #222;
     padding: 0 10px;	
 }
 .product-item-size .btn:hover,

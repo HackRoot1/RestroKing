@@ -19,7 +19,6 @@
                                         <th>Product</th>
                                         <th>Product name</th>
                                         <th>Unit Price</th>
-                                        <th>Quantity</th>
                                         <th>Add to cart </th>
                                         <th>Close</th>
                                     </tr>
@@ -32,12 +31,6 @@
                                             </td>
                                             <td class="product-item-name">{{ $item->foodslist->name }}</td>
                                             <td class="product-item-price">${{ $item->foodslist->price }}</td>
-                                            <td class="product-item-quantity">
-                                                <div class="quantity btn-quantity max-w80">
-                                                    <input id="productQuantity" type="text" value="1"
-                                                        name="productQuantity" />
-                                                </div>
-                                            </td>
                                             <td class="product-item-totle">
                                                 <a href="{{ route('add.to.cart', $item->foodslist->id) }}"
                                                     class="btn btnhover">Add To Cart</a>

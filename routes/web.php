@@ -27,6 +27,7 @@ Route::middleware(AuthMiddleware::class)->group(function() {
     Route::get('/cart-delete/{id}', [ShoppingController::class, 'deleteCartItem'])->name('delete.from.cart');
     
     Route::post('/checkCoupon', [ShoppingController::class, 'checkCoupon']);
+    Route::post('/makeOrder', [ShoppingController::class, 'makeOrder']);
     Route::post('/checkout', [ShoppingController::class, 'chekoutOrderView'])->name('chekout.order.view');
     Route::get('/orders', [ShoppingController::class, 'ordersView'])->name('orders.view');
 });
