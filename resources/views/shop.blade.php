@@ -108,7 +108,6 @@
                                 </div>
                                 <button type="submit" class="btn btn-hover">Apply Filters</button>
                             </form>
-
                         </aside>
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-7">

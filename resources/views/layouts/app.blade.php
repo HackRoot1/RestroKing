@@ -89,7 +89,7 @@
                                 </li>
                                 <li><a href="javascript:void(0);">Blogs</a>
                                 </li>
-                                @auth()
+                                @can('isUserCustomer')
                                     <li><a href="javascript:void(0);">{{ Auth::user()->firstname }}<i
                                                 class="fa fa-chevron-down"></i></a>
                                         <ul class="sub-menu">
@@ -98,11 +98,12 @@
                                             <li><a href="{{ route('logout') }}">Logout</a></li>
                                         </ul>
                                     </li>
-                                @else
+                                @endcan
+                                @cannot('isUserCustomer')
                                     <li>
                                         <a href="{{ route('login.view') }}">Log In</a>
                                     </li>
-                                @endauth
+                                @endcannot
                             </ul>
                         </div>
                     </div>
