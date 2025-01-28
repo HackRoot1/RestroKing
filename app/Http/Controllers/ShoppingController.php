@@ -14,13 +14,24 @@ use Flasher\Prime\FlasherInterface;
 
 class ShoppingController extends Controller
 {
-    public function shopView(String $category = null)
+    public function shopView(Request $request)
     {
-        if (isset($category) && $category != null) {
-            $foods = Foods::where('category', $category)->paginate(9);
-        } else {
-            $foods = Foods::paginate(9);
+        $foods = Foods::query();
+        if (isset($request->foodCategory) && $request->foodCategory != null) {
+            $foods->whereIn('category', $request->foodCategory);
         }
+
+        if (isset($request->priceRange) && $request->priceRange != null) {
+            if ($request->priceRange == 200) {
+                $foods->where('price', '<', '200');
+            } else if ($request->priceRange == 400) {
+                $foods->where('price', '<', '400')->where('price', '>', '200');
+            } else if ($request->priceRange == 401) {
+                $foods->where('price', '>', '400');
+            }
+        }
+        $foods = $foods->paginate(9);
+
         $foodsCategories = DB::table('foods')->distinct()->pluck('category');
         return view('shop', ['foods' => $foods, 'foodsCategories' => $foodsCategories]);
     }
