@@ -92,6 +92,15 @@ class ShoppingController extends Controller
     {
         return view('orders');
     }
+
+    public function ordersListView()
+    {
+        $ordersList = Order::where('user_id', Auth::id())
+            ->with('foodslist')
+            ->get();
+        return view('orders-list', compact('ordersList'));
+    }
+
     public function wishlistsView()
     {
         $wishlists = Wishlist::where('user_id', Auth::user()->id)->with('foodslist')->get();
@@ -150,12 +159,6 @@ class ShoppingController extends Controller
     // API Request 
     public function makeOrder(Request $request)
     {
-        // $foodId = implode(', ', $request->foodId);
-        // $quantity = implode(', ', $request->quantity);
-        // $size = implode(', ', $request->size);
-        // $toppings = implode(', ', $request->toppings);
-        // $totalPrice = implode(', ', $request->totalPrice);
-        // $price = implode(', ', $request->price);
 
         for ($i = 0; $i < count($request->foodId); $i++) {
             $order = new Order();
@@ -170,6 +173,12 @@ class ShoppingController extends Controller
             $order->totalOrderPrice = $request->orderTotal;
             $order->paymentType = $request->paymentType;
             $order->couponDiscount = $request->couponId;
+
+            if (isset($request->creditCardNumber)) {
+                $order->cardNumber = $request->creditCardNumber;
+                $order->cardVerificationNumber = $request->cvv;
+            }
+
             $order->save();
 
             $cartItem = Cart::where('user_id', Auth::id())->where('food_id', $request->foodId[$i])->first();

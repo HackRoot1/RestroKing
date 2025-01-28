@@ -84,6 +84,7 @@
                                         <li><a href="{{ route('shop.view') }}">Shop</a></li>
                                         <li><a href="{{ route('cart.view') }}">Cart</a></li>
                                         <li><a href="{{ route('wishlist.view') }}">Wishlist</a></li>
+                                        <li><a href="{{ route('orders.list.view') }}">My Orders</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="javascript:void(0);">Blogs</a>

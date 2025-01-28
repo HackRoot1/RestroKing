@@ -189,8 +189,9 @@
                             couponCode: couponCode
                         }),
                         success: function(response) {
-                            $("#couponPrice").text(response.message + " " + response
-                                .couponDiscount + "%")
+                            $("#couponPrice").html(response.message + " <span id='couponId'>" +
+                                response
+                                .couponDiscount + "</span>%")
                             let subTotal = $("#orderSubtotal").text();
                             let percentPrice = parseFloat((subTotal / 100) * response
                                 .couponDiscount);
@@ -232,14 +233,10 @@
                     data: JSON.stringify(orderData),
                     success: function(response) {
                         console.log(response);
+                        location.href = '/orders-list';
                     },
                     error: function(xhr, status, error) {
-                        // $("#couponError").show();
-                        // setTimeout(() => {
-                        //     $("#couponError").hide();
-                        // }, 5000);
                         console.log(xhr.responseText);
-                        // $("#couponError").html(xhr.responseJSON.message);
                     }
                 });
             }
@@ -253,10 +250,9 @@
                 let toppings = [];
                 let totalPrice = [];
 
-
                 $(".alert").map((index, row) => {
                     let id = $(row).find(".foodId").text();
-                    let foodPrice = parseFloat($(row).find(".product-item-total").text());
+                    let foodPrice = parseFloat($(row).find(".product-item-price").text());
                     let foodQuantity = parseInt($(row).find(".productQuantity").val());
                     let productSize = $(row).find(".productSize").val();
                     let productToppings = $(row).find(".productToppings").val();
@@ -269,39 +265,47 @@
                     totalPrice.push(productTotalPrice);
                 });
 
+
+                let orderData = {
+                    foodId: foodId,
+                    price: price,
+                    quantity: quantity,
+                    size: size,
+                    toppings: toppings,
+                    totalPrice: totalPrice,
+                }
+
+                let couponId = parseFloat($("#couponId").text()) || 0;
+                if (couponId != 0) {
+                    orderData.couponId = couponId;
+                }
+
                 if (PaymentType == 'POD') {
+                    alert("Ordered with POD")
                     // Proceed further 
                     let orderSubTotal = $("#orderSubtotal").text();
                     let orderTotal = $("#orderSubtotal").text();
-                    let couponPrice = parseFloat($("#couponPrice").text()) || 0;
-                    let orderData = {
-                        foodId: foodId,
-                        price: price,
-                        quantity: quantity,
-                        size: size,
-                        toppings: toppings,
-                        totalPrice: totalPrice,
-                        orderSubTotal: orderSubTotal,
-                        orderTotal: orderTotal,
-                        paymentType: PaymentType,
-                    }
-                    console.log(orderData);
-                    // if coupon is applied 
-                    if (couponPrice != 0) {
-                        orderData.couponId = couponPrice;
-                        makeOrder(orderData);
-                    } else {
-                        makeOrder(orderData);
-                    }
+                    orderData.orderSubTotal = orderSubTotal;
+                    orderData.orderTotal = orderTotal;
+                    orderData.paymentType = PaymentType;
+                    makeOrder(orderData);
 
                 } else if (PaymentType == 'CCT') {
                     let creditCardNumber = $("#credit-card-number").val();
                     let cvv = $("#credit-card-verification").val();
                     if (creditCardNumber != '' && cvv != '') {
+                        alert("Ordered with CCT");
                         // proceed further 
-                        alert("Ordered");
+                        let orderSubTotal = $("#orderSubtotal").text();
+                        let orderTotal = $("#orderSubtotal").text();
+                        orderData.creditCardNumber = creditCardNumber;
+                        orderData.cvv = cvv;
+                        orderData.orderSubTotal = orderSubTotal;
+                        orderData.orderTotal = orderTotal;
+                        orderData.paymentType = PaymentType;
+                        makeOrder(orderData);
                     } else {
-                        alert("Something wrong");
+                        alert("Fill Card details");
                     }
                 }
             });

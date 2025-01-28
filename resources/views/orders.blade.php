@@ -30,14 +30,14 @@
                             <tbody>
                                 <tr>
                                     <td><img src="images/product/item1.jpg" alt=""></td>
-                                    <td>{{ $food->name }}</td>
-                                    <td>{{ $orderedFood['toppings'] }}</td>
-                                    <td>{{ $orderedFood['size'] }}</td>
-                                    <td>{{ $food->price }}</td>
-                                    <td>{{ $orderedFood['productQuantity'] }}</td>
-                                    <td class="product-price">{{ $food->price * $orderedFood['productQuantity'] }}</td>
+                                    <td class="foodId" style="display: none">{{ $food->id }}</td>
+                                    <td class="product-item-name">{{ $food->name }}</td>
+                                    <td class="product-item-toppings">{{ $orderedFood['toppings'] }}</td>
+                                    <td class="product-item-size">{{ $orderedFood['size'] }}</td>
+                                    <td class="product-item-price">{{ $food->price }}</td>
+                                    <td class="product-item-quantity">{{ $orderedFood['productQuantity'] }}</td>
+                                    <td class="product-item-total">{{ $food->price * $orderedFood['productQuantity'] }}</td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -116,7 +116,7 @@
         $(document).ready(function() {
 
             function orderSubTotal() {
-                let price = parseFloat($(".product-price").text());
+                let price = parseFloat($(".product-item-price").text());
                 $("#orderSubtotal").text(price);
             }
 
@@ -143,8 +143,9 @@
                             couponCode: couponCode
                         }),
                         success: function(response) {
-                            $("#couponPrice").text(response.message + " " + response
-                                .couponDiscount + "%")
+                            $("#couponPrice").html(response.message + " <span id='couponId'>" +
+                                response
+                                .couponDiscount + "</span>%")
                             let subTotal = $("#orderSubtotal").text();
                             let percentPrice = parseFloat((subTotal / 100) * response
                                 .couponDiscount);
@@ -179,19 +180,58 @@
             CheckPaymentType();
 
             $("#proceedCheckout").on("click", function() {
+                let foodId = $(".foodId").text();
+                let foodPrice = parseFloat($(".product-item-price").text());
+                let foodQuantity = parseInt($(".product-item-quantity").text());
+                let productSize = $(".product-item-size").text();
+                let productToppings = $(".product-item-toppings").text();
+                let productTotalPrice = parseInt($(".product-item-total").text());
+
                 let PaymentType = $("select[name='paymentMethod']").val();
+
+                let orderData = {
+                    foodId: foodId[foodId],
+                    price: foodPrice[foodPrice],
+                    quantity: foodQuantity[foodQuantity],
+                    size: productSize[productSize],
+                    toppings: productToppings[productToppings],
+                    totalPrice: productTotalPrice[productTotalPrice],
+                }
+
+                // if coupon is applied 
+                let couponId = parseFloat($("#couponId").text()) || 0;
+                if (couponId != 0) {
+                    orderData.couponId = couponId;
+                }
 
                 if (PaymentType == 'POD') {
                     // Proceed further 
-                    alert("Ordered");
+                    alert("Ordered with POD");
+                    let orderSubTotal = $("#orderSubtotal").text();
+                    let orderTotal = $("#orderTotal").text();
+                    orderData.orderSubTotal = orderSubTotal;
+                    orderData.orderTotal = orderTotal;
+                    orderData.paymentType = PaymentType;
+                    makeOrder(orderData);
+
                 } else if (PaymentType == 'CCT') {
                     let creditCardNumber = $("#credit-card-number").val();
                     let cvv = $("#credit-card-verification").val();
                     if (creditCardNumber != '' && cvv != '') {
                         // proceed further 
-                        alert("Ordered");
+                        alert("Ordered with CCT");
+                        // proceed further 
+                        let orderSubTotal = $("#orderSubtotal").text();
+                        let orderTotal = $("#orderTotal").text();
+                        orderData.creditCardNumber = creditCardNumber;
+                        orderData.cvv = cvv;
+                        orderData.orderSubTotal = orderSubTotal;
+                        orderData.orderTotal = orderTotal;
+                        orderData.paymentType = PaymentType;
+                        console.log(orderData);
+                        makeOrder(orderData);
                     } else {
-                        alert("Something wrong");
+                        alert("Fill Card details");
                     }
                 }
             });
@@ -206,6 +246,7 @@
                     }),
                     success: function(response) {
                         console.log(response);
+                        location.href = '/orders-list';
                     },
                     error: function(xhr, status, error) {
                         // $("#couponError").show();

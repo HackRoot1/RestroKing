@@ -30,4 +30,5 @@ Route::middleware(AuthMiddleware::class)->group(function() {
     Route::post('/makeOrder', [ShoppingController::class, 'makeOrder']);
     Route::post('/checkout', [ShoppingController::class, 'chekoutOrderView'])->name('chekout.order.view');
     Route::get('/orders', [ShoppingController::class, 'ordersView'])->name('orders.view');
+    Route::get('/orders-list', [ShoppingController::class, 'ordersListView'])->name('orders.list.view');
 });
