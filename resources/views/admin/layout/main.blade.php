@@ -276,14 +276,14 @@
                     <li class="menu-title">Foods Section</li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#categoryLayout" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="categoryLayout">
+                        <a class="nav-link menu-arrow" href="#foodList" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="foodList">
                             <span class="nav-icon">
                                 <iconify-icon icon="mingcute:layout-line"></iconify-icon>
                             </span>
                             <span class="nav-text"> Foods Data </span>
                         </a>
-                        <div class="collapse" id="categoryLayout">
+                        <div class="collapse" id="foodList">
                             <ul class="nav sub-navbar-nav">
                                 <li class="sub-nav-item">
                                     <a class="sub-nav-link" href="{{ route('add.food.view') }}">
@@ -300,21 +300,21 @@
                     <li class="menu-title">Categories Section</li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#categoryLayout" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="categoryLayout">
+                        <a class="nav-link menu-arrow" href="#foodCategory" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="foodCategory">
                             <span class="nav-icon">
                                 <iconify-icon icon="mingcute:layout-line"></iconify-icon>
                             </span>
                             <span class="nav-text"> Foods Category </span>
                         </a>
-                        <div class="collapse" id="categoryLayout">
+                        <div class="collapse" id="foodCategory">
                             <ul class="nav sub-navbar-nav">
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="{{ route('add.food.view') }}">
+                                    <a class="sub-nav-link" href="{{ route('add.food.category.view') }}">
                                         Add Food Category</a>
                                 </li>
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="{{ route('view.foods') }}">
+                                    <a class="sub-nav-link" href="{{ route('view.food.categories') }}">
                                         View Foods Categories list</a>
                                 </li>
                             </ul>

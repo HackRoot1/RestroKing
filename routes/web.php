@@ -54,6 +54,13 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-food', [HandleFoodsDataController::class, 'deleteFood'])->name('delete.food');
         Route::get('/update-food/{id}', [HandleFoodsDataController::class, 'showUpdateFood'])->name('update.food.view');
         Route::put('/update-food', [HandleFoodsDataController::class, 'updateFood'])->name('update.food');
-
+        
+        // Manage Food Category
+        Route::get('/add-food-category', [HandleFoodsDataController::class, 'addFoodCategoryDataView'])->name('add.food.category.view');
+        Route::post('/store-food-category', [HandleFoodsDataController::class, 'storeFoodCategoryDataView'])->name('store.food.category');
+        Route::get('/view-food-categories', [HandleFoodsDataController::class, 'viewFoodCategoriesData'])->name('view.food.categories');
+        Route::delete('/delete-food-categories', [HandleFoodsDataController::class, 'deleteFoodCategory'])->name('delete.food.category');
+        Route::get('/update-food-category/{id}', [HandleFoodsDataController::class, 'showUpdateFoodCategory'])->name('update.food.category.view');
+        Route::put('/update-food-category', [HandleFoodsDataController::class, 'updateFoodCategory'])->name('update.food.category');
     });
 });

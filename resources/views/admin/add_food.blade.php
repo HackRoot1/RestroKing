@@ -26,42 +26,76 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('store.subcategory') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('store.food') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             <div>
+
                                 <div class="mb-3">
-                                    <label for="example-select" class="form-label">Exam Category</label>
-                                    <select class="form-select" name="examCategory" id="example-select">
-                                        @foreach ($exams as $category)
-                                            <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                    <label for="foodName" class="form-label">Food Name</label>
+                                    <input type="text" id="foodName" value="{{ old('foodName') }}" name="foodName"
+                                        class="form-control" placeholder="Food Name">
+                                    @error('foodName')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="foodDescription" class="form-label">Food Description</label>
+                                    <input type="text" id="foodDescription" value="{{ old('foodDescription') }}"
+                                        name="foodDescription" class="form-control" placeholder="Food Name">
+                                    @error('foodDescription')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="category-select" class="form-label">Food Category</label>
+                                    <select class="form-select" name="foodCategory" id="category-select">
+                                        @foreach ($foodCategories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->food_category }}</option>
                                         @endforeach
                                     </select>
-                                    @error('examCategory')
+                                    @error('foodCategory')
                                         {{ $message }}
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exam-category" class="form-label">Exam Sub-Category</label>
-                                    <input type="text" id="exam-category" value="{{ old('examCategory') }}"
-                                        name="examSubCategory" class="form-control" placeholder="Exam Category">
-                                    @error('examSubCategory')
+                                    <label for="foodIngredients" class="form-label">Food Description</label>
+                                    <input type="text" id="foodIngredients" value="{{ old('foodIngredients') }}"
+                                        name="foodIngredients" class="form-control" placeholder="Food Name">
+                                    @error('foodIngredients')
                                         {{ $message }}
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="no_of_exams" class="form-label">No of Exams</label>
-                                    <input type="number" id="no_of_exams" value="{{ old('no_of_exams') }}"
-                                        name="no_of_exams" class="form-control" placeholder="No of Exams">
-                                    @error('no_of_exams')
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="number" id="price" value="{{ old('price') }}"
+                                        name="price" class="form-control" placeholder="Food Price">
+                                    @error('price')
                                         {{ $message }}
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="sub-category-image" class="form-label">Upload Sub Category Image</label>
-                                    <input type="file" id="sub-category-image" value="{{ old('subCategoryImage') }}"
-                                        name="subCategoryImage" class="form-control">
-                                    @error('subCategoryImage')
+                                    <label for="discount" class="form-label">Discount</label>
+                                    <input type="number" id="discount" value="{{ old('discount') }}"
+                                        name="discount" class="form-control" placeholder="Food Discount">
+                                    @error('discount')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="badge-select" class="form-label">Food Badge</label>
+                                    <select class="form-select" name="badge" id="badge-select">
+                                        <option value="{{ $category->id }}">{{ $category->food_category }}</option>
+                                    </select>
+                                    @error('badge')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="food-image" class="form-label">Upload Sub Category Image</label>
+                                    <input type="file" id="food-image" value="{{ old('foodImage') }}"
+                                        name="foodImage" class="form-control">
+                                    @error('foodImage')
                                         {{ $message }}
                                     @enderror
                                 </div>

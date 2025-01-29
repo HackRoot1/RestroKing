@@ -44,12 +44,12 @@
                                     <div class="panel">
                                         <div class="acod-head">
                                             <h5 class="acod-title">
-                                                <a data-toggle="collapse" href="#price-range">
+                                                <a data-toggle="collapse" href="#price-range" class="collapsed">
                                                     Price Range
                                                 </a>
                                             </h5>
                                         </div>
-                                        <div id="price-range" class="acod-body collapse show">
+                                        <div id="price-range" class="acod-body collapse">
                                             <div class="acod-content">
                                                 <div class="product-brand">
                                                     <div class="search-content">
