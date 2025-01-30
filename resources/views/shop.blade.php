@@ -30,10 +30,10 @@
                                                 <div class="product-brand">
                                                     @foreach ($foodsCategories as $foodsCategory)
                                                         <div class="search-content">
-                                                            <input type="checkbox" id="{{ $foodsCategory }}"
-                                                                name="foodCategory[]" value="{{ $foodsCategory }}">
-                                                            <label for="{{ $foodsCategory }}" class="search-content-area">
-                                                                <span>{{ $foodsCategory }}</span>
+                                                            <input type="checkbox" id="{{ $foodsCategory->food_category }}"
+                                                                name="foodCategory[]" value="{{ $foodsCategory->id }}">
+                                                            <label for="{{ $foodsCategory->food_category }}" class="search-content-area">
+                                                                <span>{{ $foodsCategory->food_category }}</span>
                                                             </label>
                                                         </div>
                                                     @endforeach

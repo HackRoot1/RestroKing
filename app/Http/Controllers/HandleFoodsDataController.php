@@ -63,7 +63,8 @@ class HandleFoodsDataController extends Controller
 
     public function viewFoods()
     {
-        $foods = Foods::get();
+        // $foods = Foods::get();
+        $foods = Foods::with('categories')->get();
         return view('admin.view_food', compact('foods'));
     }
 
@@ -76,7 +77,7 @@ class HandleFoodsDataController extends Controller
 
     public function showUpdateFood(String $id)
     {
-        $foodData = Foods::find($id);
+        $foodData = Foods::with('categories')->find($id);
         $foodCategories = FoodCategories::get();
         return view('admin.edit_food', compact('foodData', 'foodCategories'));
     }

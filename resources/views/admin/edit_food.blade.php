@@ -26,9 +26,9 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('store.food') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('update.food') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method('POST')
+                            @method('PUT')
                             <div>
 
                                 <div class="mb-3">
@@ -52,7 +52,7 @@
                                     <label for="category-select" class="form-label">Food Category</label>
                                     <select class="form-select" name="foodCategory" id="category-select">
                                         @foreach ($foodCategories as $category)
-                                            @if ($category->food_category == $foodData->category)
+                                            @if ($category->id == $foodData->category)
                                                 <option value="{{ $category->id }}" selected>{{ $category->food_category }}
                                                 </option>
                                             @else

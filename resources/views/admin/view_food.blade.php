@@ -22,7 +22,7 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
-                    Exam Sub Categories
+                    Food List
                 </h5>
                 <p class="card-subtitle">
                     A list of all the users in your account including their name, title, email
@@ -69,7 +69,7 @@
                                     <td>{{ $food->name }}</td>
                                     <td>{{ $food->description }}</td>
                                     <td>{{ $food->price }}</td>
-                                    <td>{{ $food->category }}</td>
+                                    <td>{{ $food->categories->food_category }}</td>
                                     <td>{{ $food->ingredients }}</td>
                                     <td>{{ $food->discount }}</td>
                                     <td>{{ $food->badge }}</td>

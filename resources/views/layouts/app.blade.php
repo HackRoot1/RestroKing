@@ -93,7 +93,6 @@
                                     <li><a href="javascript:void(0);">{{ Auth::user()->firstname }}<i
                                                 class="fa fa-chevron-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Settings</a></li>
                                             <li><a href="{{ route('profile.view') }}">Profile</a></li>
                                             <li><a href="{{ route('logout') }}">Logout</a></li>
                                         </ul>

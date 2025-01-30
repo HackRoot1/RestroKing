@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Coupon;
+use App\Models\FoodCategories;
 use App\Models\Foods;
 use App\Models\Order;
 use App\Models\Wishlist;
@@ -30,9 +31,10 @@ class ShoppingController extends Controller
                 $foods->where('price', '>', '400');
             }
         }
-        $foods = $foods->paginate(9);
+        $foods = $foods->with('categories')->paginate(9);
 
-        $foodsCategories = DB::table('foods')->distinct()->pluck('category');
+        $foodsCategories = FoodCategories::get();
+        // $foodsCategories = DB::table('foods')->distinct()->pluck('category');
         return view('shop', ['foods' => $foods, 'foodsCategories' => $foodsCategories]);
     }
 
