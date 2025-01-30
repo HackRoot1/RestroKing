@@ -86,19 +86,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            {{-- <tr>
-                                                  <td>
-                                                       <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                 id="flexCheckDefault2">
-                                                       </div>
-                                                  </td>
-                                                  <td>James E. Chamb</td>
-                                                  <td>UI/UX Designer</td>
-                                                  <td>jamesechambliss@teleworm.us</td>
-                                                  <td>Admin</td>
-                                                  <td><a href="#!" class="btn btn-primary btn-sm w-100">Edit</a></td>
-                                             </tr> --}}
                         </tbody>
                     </table>
                 </div>

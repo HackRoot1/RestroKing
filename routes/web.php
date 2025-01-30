@@ -47,6 +47,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
         Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
         
+        // Customers Data
+        Route::get('/view-customers', [HandleFoodsDataController::class, 'viewCustomers'])->name('view.customers');
+
         // Manage Foods data
         Route::get('/add-food', [HandleFoodsDataController::class, 'addFoodDataView'])->name('add.food.view');
         Route::post('/store-food', [HandleFoodsDataController::class, 'storeFood'])->name('store.food');

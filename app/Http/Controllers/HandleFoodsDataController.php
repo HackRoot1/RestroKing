@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Foods;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -10,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class HandleFoodsDataController extends Controller
 {
+
+    // Customers Data 
+
+    public function viewCustomers() {
+        $customers = User::where('role', 'customer')->get();
+        return view('admin.view_customers', compact('customers'));
+    }
+
 
     // Food Data
     public function addFoodDataView()

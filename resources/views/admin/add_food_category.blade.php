@@ -32,8 +32,8 @@
                             <div>
                                 <div class="mb-3">
                                     <label for="category" class="form-label">Food Category</label>
-                                    <input type="text" id="category" value="{{ old('category') }}"
-                                        name="category" class="form-control" placeholder="Exam Category">
+                                    <input type="text" id="category" value="{{ old('category') }}" name="category"
+                                        class="form-control" placeholder="Exam Category">
                                     @error('category')
                                         {{ $message }}
                                     @enderror

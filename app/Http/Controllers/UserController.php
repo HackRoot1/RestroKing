@@ -65,7 +65,7 @@ class UserController extends Controller
         $user->save();
 
         if($user) {
-            return redirect()->route('login');
+            return redirect()->route('login.view');
         }else {
             return back()->withErrors('error', 'please try again');
         }

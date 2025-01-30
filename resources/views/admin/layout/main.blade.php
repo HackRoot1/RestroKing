@@ -273,6 +273,26 @@
                         </a>
                     </li>
 
+                    <li class="menu-title">Customers Section</li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-arrow" href="#customersData" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="customersData">
+                            <span class="nav-icon">
+                                <iconify-icon icon="mingcute:layout-line"></iconify-icon>
+                            </span>
+                            <span class="nav-text"> Customers Data </span>
+                        </a>
+                        <div class="collapse" id="customersData">
+                            <ul class="nav sub-navbar-nav">
+                                <li class="sub-nav-item">
+                                    <a class="sub-nav-link" href="{{ route('view.customers') }}">
+                                        View Customers list</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="menu-title">Foods Section</li>
 
                     <li class="nav-item">
