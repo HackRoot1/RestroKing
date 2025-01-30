@@ -43,14 +43,18 @@
                                 </th>
 
                                 <th scope="col">Thumbnail Image</th>
-                                <th scope="col">Exam Category</th>
-                                <th scope="col">Exam Sub-Category</th>
-                                <th scope="col">Exam CBT's</th>
+                                <th scope="col">Food Name</th>
+                                <th scope="col">Food Description</th>
+                                <th scope="col">Food Price</th>
+                                <th scope="col">Food Category</th>
+                                <th scope="col">Food Ingredient</th>
+                                <th scope="col">Food Discount</th>
+                                <th scope="col">Food Badge</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($exams as $category)
+                            @foreach ($foods as $food)
                                 <tr>
                                     <td>
                                         <div class="form-check">
@@ -59,22 +63,24 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @isset($category->image->image)
-                                            <img src="{{ asset('uploads/profile/thumb/' . $category->image->image) }}"
-                                                alt="" class="avatar-lg rounded-3">
-                                        @endisset
+                                        <img src=""
+                                            alt="" class="avatar-lg rounded-3">
                                     </td>
-                                    <td> {{ $category->categories->category }}</td>
-                                    <td> {{ $category->sub_category }}</td>
-                                    <td> {{ $category->no_of_exams }}</td>
+                                    <td>{{ $food->name }}</td>
+                                    <td>{{ $food->description }}</td>
+                                    <td>{{ $food->price }}</td>
+                                    <td>{{ $food->category }}</td>
+                                    <td>{{ $food->ingredients }}</td>
+                                    <td>{{ $food->discount }}</td>
+                                    <td>{{ $food->badge }}</td>
 
                                     <td>
-                                        <a href="{{ route('update.subcategories', $category->id) }}"
+                                        <a href="{{ route('update.food.view', $food->id) }}"
                                             class="d-inline btn btn-primary btn-sm">Edit</a>
-                                        <form action="{{ route('delete.subcategories') }}" method="POST" class="d-inline">
+                                        <form action="{{ route('delete.food') }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <input type="hidden" name="id" value="{{ $category->id }}">
+                                            <input type="hidden" name="id" value="{{ $food->id }}">
                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                         </form>
                                     </td>

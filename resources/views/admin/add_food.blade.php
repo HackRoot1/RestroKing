@@ -59,9 +59,9 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="foodIngredients" class="form-label">Food Description</label>
+                                    <label for="foodIngredients" class="form-label">Food Ingredient</label>
                                     <input type="text" id="foodIngredients" value="{{ old('foodIngredients') }}"
-                                        name="foodIngredients" class="form-control" placeholder="Food Name">
+                                        name="foodIngredients" class="form-control" placeholder="Food Ingredient">
                                     @error('foodIngredients')
                                         {{ $message }}
                                     @enderror
