@@ -73,7 +73,8 @@ class UserController extends Controller
 
     public function profileView()
     {
-        return view('profile');
+        $user = User::find(Auth::user()->id);
+        return view('profile', compact('user'));
     }
     
     public function logout()
