@@ -7,7 +7,9 @@ use App\Models\Foods;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\FoodCategories;
+use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class HandleFoodsDataController extends Controller
 {
@@ -30,7 +32,7 @@ class HandleFoodsDataController extends Controller
     public function storeFood(Request $request)
     {
 
-        $validation = Validator::make($request->all(), [
+        $rules = [
             'foodName' => 'required',
             'foodDescription' => 'required',
             'foodCategory' => 'required',
@@ -38,7 +40,13 @@ class HandleFoodsDataController extends Controller
             'price' => 'required',
             'discount' => 'required',
             'badge' => 'required',
-        ]);
+        ];
+
+        if ($request->hasFile('foodImage')) {
+            $rules['foodImage'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        }
+
+        $validation = Validator::make($request->all(), $rules);
 
         if ($validation->fails()) {
             return back()->withErrors($validation)->withInput();
@@ -55,8 +63,51 @@ class HandleFoodsDataController extends Controller
         $food->price = $request->price;
         $food->discount = $request->discount;
         $food->badge = $request->badge;
-        $food->image = 'demo.png';
         $food->save();
+
+        
+
+        if ($request->hasFile('foodImage')) {
+
+            // checking if already image available or not 
+            if (isset($food->image)) {
+                $image_path = public_path('/images/foods/' . $food->image);
+                $image_thumb_path = public_path('/images/foods/thumb/' . $food->image);
+                if (file_exists($image_thumb_path)) {
+                    @unlink($image_path);
+                    @unlink($image_thumb_path);
+                }
+            }
+
+            // uploading image in main folder
+            $image = $request->file('foodImage');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/images/foods/'), $imageName);
+
+            // converting image as thumbnail
+            $manager = new ImageManager(Driver::class);
+            $img = $manager->read(public_path('/images/foods/' . $imageName));
+            $img->cover(150, 150);
+
+            $thumbPath = public_path('/images/foods/thumb');
+            if (!file_exists($thumbPath)) {
+                mkdir($thumbPath, 0755, true); // Create thumbnail directory if it doesn't exist
+            }
+
+            $img->save($thumbPath . '/' . $imageName);
+            // thumbnail done 
+
+            // updating image 
+            if (isset($food->image)) {
+                $food->image()->update([
+                    'image' => $imageName,
+                ]);
+            } else {
+                $food->image()->create([
+                    'image' => $imageName,
+                ]);
+            }
+        }
 
         return redirect()->route('view.foods')->with('success', 'Successfully Added Food Item');
     }
@@ -64,7 +115,7 @@ class HandleFoodsDataController extends Controller
     public function viewFoods()
     {
         // $foods = Foods::get();
-        $foods = Foods::with('categories')->get();
+        $foods = Foods::with('categories')->with('image')->get();
         return view('admin.view_food', compact('foods'));
     }
 

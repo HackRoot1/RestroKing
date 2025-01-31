@@ -28,13 +28,13 @@ class UserController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        if($validations->fails()) {
+        if ($validations->fails()) {
             return back()->withErrors($validations)->withInput();
         }
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'customer'])) {
             return redirect()->route('home');
-        }else {
+        } else {
             return back()->withErrors('error', 'Incorrect email or password ');
         }
     }
@@ -47,13 +47,13 @@ class UserController extends Controller
     public function registerStore(Request $request)
     {
         $validations = Validator::make($request->all(), [
-            'firstname' => 'required', 
+            'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'email|unique:users',
             'password' => 'required|min:6',
         ]);
 
-        if($validations->fails()) {
+        if ($validations->fails()) {
             return back()->withErrors($validations)->withInput();
         }
 
@@ -64,9 +64,9 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        if($user) {
+        if ($user) {
             return redirect()->route('login.view');
-        }else {
+        } else {
             return back()->withErrors('error', 'please try again');
         }
     }
@@ -76,7 +76,7 @@ class UserController extends Controller
         $user = User::find(Auth::user()->id);
         return view('profile', compact('user'));
     }
-    
+
     public function logout()
     {
         Auth::logout();

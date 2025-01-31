@@ -63,8 +63,13 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img src=""
-                                            alt="" class="avatar-lg rounded-3">
+                                    @isset($food->image->image)
+                                    <img src="{{ asset('/images/foods/thumb/' . $food->image->image) }}"
+                                        alt="" class="avatar-lg rounded-3">
+                                    @else   
+                                    <img src=""
+                                        alt="No Image" class="avatar-lg rounded-3">
+                                    @endisset
                                     </td>
                                     <td>{{ $food->name }}</td>
                                     <td>{{ $food->description }}</td>
