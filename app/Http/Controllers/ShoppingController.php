@@ -43,7 +43,7 @@ class ShoppingController extends Controller
     public function foodDetail(String $slug)
     {
         $user = User::find(Auth::id());
-        $foods = Foods::where('slug', $slug)->first();
+        $foods = Foods::where('slug', $slug)->with('ratings.user')->first();
         $relatedFoods = Foods::where('category', $foods->category)->get();
         return view('food-detail', ['foods' => $foods, 'relatedFoods' => $relatedFoods, 'user' => $user]);
     }

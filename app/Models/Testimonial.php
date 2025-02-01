@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Testimonial extends Model
 {
     public function foods() {
-        $this->belongsTo(Food::class, 'food_id', 'id');
+        return $this->belongsTo(Food::class, 'food_id', 'id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

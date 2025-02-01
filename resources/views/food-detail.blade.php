@@ -133,99 +133,40 @@
                                     <div id="developement-1" class="tab-pane">
                                         <div id="comments">
                                             <ol class="commentlist">
-                                                <li class="comment">
-                                                    <div class="comment_container">
-                                                        <img class="avatar avatar-60 photo"
-                                                            src="{{ asset('images/testimonials/pic1.jpg') }}"
-                                                            alt="">
-                                                        <div class="comment-text">
-                                                            <div class="star-rating">
-                                                                <div data-rating="3" class="rating-bx">
-                                                                    <i class="fa fa-star" data-alt="1"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="2"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="3"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="4"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="5"
-                                                                        title="regular"></i>
+                                                @foreach ($foods->ratings as $rating)
+                                                    <li class="comment">
+                                                        <div class="comment_container">
+                                                            <img class="avatar avatar-60 photo"
+                                                                src="{{ asset('images/testimonials/pic1.jpg') }}"
+                                                                alt="">
+                                                            <div class="comment-text">
+                                                                <div class="star-rating">
+                                                                    <div data-rating="3" class="rating-bx">
+                                                                        @for ($r = 1; $r <= $rating->rating; $r++)
+                                                                            <i class="fa fa-star"
+                                                                                data-alt="{{ $r }}"
+                                                                                title="regular"></i>
+                                                                        @endfor
+
+                                                                        @for ($nr = $rating->rating; $nr < 5; $nr++)
+                                                                            <i class="fa fa-star-o"
+                                                                                data-alt="{{ $nr }}"
+                                                                                title="regular"></i>
+                                                                        @endfor
+                                                                    </div>
+                                                                </div>
+                                                                <p class="meta">
+                                                                    <strong
+                                                                        class="author">{{ $rating->user->firstname }}</strong>
+                                                                    <span>{{ $rating->updated_at }}</span>
+                                                                </p>
+                                                                <div class="description">
+                                                                    <p>{{ $rating->testimonial }}</p>
                                                                 </div>
                                                             </div>
-                                                            <p class="meta">
-                                                                <strong class="author">Cobus Bester</strong>
-                                                                <span> March 7, 2013</span>
-                                                            </p>
-                                                            <div class="description">
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and
-                                                                    typesetting industry.</p>
-                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </li>
-                                                <li class="comment">
-                                                    <div class="comment_container">
-                                                        <img class="avatar avatar-60 photo"
-                                                            src="{{ asset('images/testimonials/pic2.jpg') }}"
-                                                            alt="">
-                                                        <div class="comment-text">
-                                                            <div class="star-rating">
-                                                                <div data-rating="3" class="rating-bx">
-                                                                    <i class="fa fa-star" data-alt="1"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="2"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="3"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star-o" data-alt="4"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star-o" data-alt="5"
-                                                                        title="regular"></i>
-                                                                </div>
-                                                            </div>
-                                                            <p class="meta">
-                                                                <strong class="author">Cobus Bester</strong>
-                                                                <span> March 7, 2013</span>
-                                                            </p>
-                                                            <div class="description">
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and
-                                                                    typesetting industry.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="comment">
-                                                    <div class="comment_container">
-                                                        <img class="avatar avatar-60 photo"
-                                                            src="{{ asset('images/testimonials/pic3.jpg') }}"
-                                                            alt="">
-                                                        <div class="comment-text">
-                                                            <div class="star-rating">
-                                                                <div data-rating="3" class="rating-bx">
-                                                                    <i class="fa fa-star" data-alt="1"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="2"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="3"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star" data-alt="4"
-                                                                        title="regular"></i>
-                                                                    <i class="fa fa-star-o" data-alt="5"
-                                                                        title="regular"></i>
-                                                                </div>
-                                                            </div>
-                                                            <p class="meta">
-                                                                <strong class="author">Cobus Bester</strong>
-                                                                <span> March 7, 2013</span>
-                                                            </p>
-                                                            <div class="description">
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and
-                                                                    typesetting industry.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
+                                                @endforeach
                                             </ol>
                                         </div>
                                         <div id="review_form_wrapper">

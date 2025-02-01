@@ -10,8 +10,14 @@ class Foods extends Model
     {
         return $this->belongsTo(FoodCategories::class, 'category');
     }
+    
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Testimonial::class, 'food_id');
     }
 }
