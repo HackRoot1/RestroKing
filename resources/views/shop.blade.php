@@ -32,7 +32,8 @@
                                                         <div class="search-content">
                                                             <input type="checkbox" id="{{ $foodsCategory->food_category }}"
                                                                 name="foodCategory[]" value="{{ $foodsCategory->id }}">
-                                                            <label for="{{ $foodsCategory->food_category }}" class="search-content-area">
+                                                            <label for="{{ $foodsCategory->food_category }}"
+                                                                class="search-content-area">
                                                                 <span>{{ $foodsCategory->food_category }}</span>
                                                             </label>
                                                         </div>
@@ -116,7 +117,13 @@
                                 <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
                                     <div class="item-box shop-item style2">
                                         <div class="item-img">
-                                            <img src="{{ asset('images/product/item1.jpg') }}" alt="">
+                                            @if ($food->image->image)
+                                                <img src="{{ asset('/images/foods/' . $food->image->image) }}"
+                                                    alt="">
+                                            @else
+                                                <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                            @endif
+
                                             <span class="sale"><a href="{{ route('add.to.cart', $food->id) }}"> <i
                                                         class="ti-shopping-cart"></i></a></span>
                                             <div class="fav-btn"> <a href="{{ route('add.to.wishlist', $food->id) }}"><i

@@ -122,6 +122,7 @@ class HandleFoodsDataController extends Controller
     public function deleteFood(Request $request)
     {
         $food = Foods::find($request->id);
+        $food->image()->delete();
         $food->delete();
         return redirect()->back()->with('success', 'Successfully deleted food category');
     }
@@ -134,7 +135,8 @@ class HandleFoodsDataController extends Controller
     }
 
     public function updateFood(Request $request) {
-        $validation = Validator::make($request->all(), [
+
+        $rules = [
             'foodId' => 'required|numeric',
             'foodName' => 'required',
             'foodDescription' => 'required',
@@ -143,7 +145,13 @@ class HandleFoodsDataController extends Controller
             'price' => 'required',
             'discount' => 'required',
             'badge' => 'required',
-        ]);
+        ];
+
+        if ($request->hasFile('foodImage')) {
+            $rules['foodImage'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        }
+
+        $validation = Validator::make($request->all(), $rules);
 
         if ($validation->fails()) {
             return back()->withErrors($validation)->withInput();
@@ -160,8 +168,49 @@ class HandleFoodsDataController extends Controller
         $food->price = $request->price;
         $food->discount = $request->discount;
         $food->badge = $request->badge;
-        $food->image = 'demo.png';
         $food->save();
+
+        if ($request->hasFile('foodImage')) {
+
+            // checking if already image available or not 
+            if (isset($food->image)) {
+                $image_path = public_path('/images/foods/' . $food->image);
+                $image_thumb_path = public_path('/images/foods/thumb/' . $food->image);
+                if (file_exists($image_thumb_path)) {
+                    @unlink($image_path);
+                    @unlink($image_thumb_path);
+                }
+            }
+
+            // uploading image in main folder
+            $image = $request->file('foodImage');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('/images/foods/'), $imageName);
+
+            // converting image as thumbnail
+            $manager = new ImageManager(Driver::class);
+            $img = $manager->read(public_path('/images/foods/' . $imageName));
+            $img->cover(150, 150);
+
+            $thumbPath = public_path('/images/foods/thumb');
+            if (!file_exists($thumbPath)) {
+                mkdir($thumbPath, 0755, true); // Create thumbnail directory if it doesn't exist
+            }
+
+            $img->save($thumbPath . '/' . $imageName);
+            // thumbnail done 
+
+            // updating image 
+            if (isset($food->image)) {
+                $food->image()->update([
+                    'image' => $imageName,
+                ]);
+            } else {
+                $food->image()->create([
+                    'image' => $imageName,
+                ]);
+            }
+        }
 
         return redirect()->route('view.foods')->with('success', 'Successfully Updated Food Item');
     }

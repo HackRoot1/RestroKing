@@ -33,10 +33,9 @@ class ShoppingController extends Controller
                 $foods->where('price', '>', '400');
             }
         }
-        $foods = $foods->with('categories')->paginate(9);
-
+        $foods = $foods->with('categories')->with('image')->paginate(9);
         $foodsCategories = FoodCategories::get();
-        // $foodsCategories = DB::table('foods')->distinct()->pluck('category');
+        // dd($foods);
         return view('shop', ['foods' => $foods, 'foodsCategories' => $foodsCategories]);
     }
 

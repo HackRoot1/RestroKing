@@ -297,8 +297,6 @@
                 let foodId = $("#foodId").val();
                 let feedback = $("#feedback").val();
                 var rating = parseInt($("#stars .rating-bx").data('rating'), 10);
-                alert(rating);
-
                 $.ajax({
                     url: '/add-rating',
                     type: 'POST',
@@ -312,6 +310,7 @@
                     }),
                     success: function(response) {
                         console.log(response)
+                        location.reload();
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr.responseJSON.message);
