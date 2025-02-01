@@ -27,7 +27,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cartItems as $item)
+                                    @forelse ($cartItems as $item)
                                         <tr class="alert">
                                             <td class="product-item-img">
                                                 <img src="images/product/thumb/item1.jpg" alt="">
@@ -59,7 +59,12 @@
                                                 <a href="{{ route('delete.from.cart', $item->id) }}" class="ti-close"></a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td class="text-center py-5" colspan="8">You Don't have any Cart Items yet. <a
+                                                    href="{{ route('shop.view') }}">Go to Shop</a></td>
+                                        </tr>
+                                    @endforelse
 
                                 </tbody>
                             </table>

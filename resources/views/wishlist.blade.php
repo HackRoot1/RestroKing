@@ -24,7 +24,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($wishlists as $item)
+                                    @forelse ($wishlists as $item)
                                         <tr class="alert">
                                             <td class="product-item-img">
                                                 <img src="images/product/thumb/item1.jpg" alt="">
@@ -40,7 +40,12 @@
                                                     class="ti-close"></a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td class="text-center py-5" colspan="5">You Don't have any Wishlist Items yet.
+                                                <a href="{{ route('shop.view') }}">Go to Shop</a></td>
+                                        </tr>
+                                    @endforelse
 
                                 </tbody>
                             </table>
