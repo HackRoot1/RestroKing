@@ -33,6 +33,7 @@ Route::middleware('IsUserValid:customer')->group(function() {
     Route::post('/checkout', [ShoppingController::class, 'chekoutOrderView'])->name('chekout.order.view');
     Route::get('/orders', [ShoppingController::class, 'ordersView'])->name('orders.view');
     Route::get('/orders-list', [ShoppingController::class, 'ordersListView'])->name('orders.list.view');
+    Route::post('/add-rating', [ShoppingController::class, 'addRating'])->name('add.rating');
 });
 
 // admin side routes

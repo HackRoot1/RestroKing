@@ -140,16 +140,16 @@
                                                             alt="">
                                                         <div class="comment-text">
                                                             <div class="star-rating">
-                                                                <div data-rating="3">
+                                                                <div data-rating="3" class="rating-bx">
                                                                     <i class="fa fa-star" data-alt="1"
                                                                         title="regular"></i>
                                                                     <i class="fa fa-star" data-alt="2"
                                                                         title="regular"></i>
-                                                                    <i class="fa fa-star-o" data-alt="3"
+                                                                    <i class="fa fa-star" data-alt="3"
                                                                         title="regular"></i>
-                                                                    <i class="fa fa-star-o" data-alt="4"
+                                                                    <i class="fa fa-star" data-alt="4"
                                                                         title="regular"></i>
-                                                                    <i class="fa fa-star-o" data-alt="5"
+                                                                    <i class="fa fa-star" data-alt="5"
                                                                         title="regular"></i>
                                                                 </div>
                                                             </div>
@@ -171,7 +171,7 @@
                                                             alt="">
                                                         <div class="comment-text">
                                                             <div class="star-rating">
-                                                                <div data-rating="3">
+                                                                <div data-rating="3" class="rating-bx">
                                                                     <i class="fa fa-star" data-alt="1"
                                                                         title="regular"></i>
                                                                     <i class="fa fa-star" data-alt="2"
@@ -202,7 +202,7 @@
                                                             alt="">
                                                         <div class="comment-text">
                                                             <div class="star-rating">
-                                                                <div data-rating="3">
+                                                                <div data-rating="3" class="rating-bx">
                                                                     <i class="fa fa-star" data-alt="1"
                                                                         title="regular"></i>
                                                                     <i class="fa fa-star" data-alt="2"
@@ -234,46 +234,49 @@
                                                     <h3 class="comment-reply-title" id="reply-title">Add a review</h3>
                                                     <p>Your email address will not be published. Required fields are marked
                                                         *</p>
-                                                    <form class="comment-form" method="post">
+                                                    <form class="comment-form" method="post"
+                                                        action="{{ route('add.rating') }}">
                                                         <div class="comment-form-rating">
                                                             <label class="pull-left m-r20">Your Rating</label>
                                                             <div class="rating-widget">
                                                                 <!-- Rating Stars Box -->
                                                                 <div class="rating-stars">
-                                                                    <ul id="stars">
-                                                                        <li class="star" title="Poor" data-value="1">
-                                                                            <i class="fa fa-star fa-fw"></i>
-                                                                        </li>
-                                                                        <li class="star" title="Fair" data-value="2">
-                                                                            <i class="fa fa-star fa-fw"></i>
-                                                                        </li>
-                                                                        <li class="star" title="Good" data-value="3">
-                                                                            <i class="fa fa-star fa-fw"></i>
-                                                                        </li>
-                                                                        <li class="star" title="Excellent"
-                                                                            data-value="4">
-                                                                            <i class="fa fa-star fa-fw"></i>
-                                                                        </li>
-                                                                        <li class="star" title="WOW!!!" data-value="5">
-                                                                            <i class="fa fa-star fa-fw"></i>
-                                                                        </li>
-                                                                    </ul>
+                                                                    <div class="star-rating" id="stars">
+                                                                        <div data-rating="0" class="rating-bx">
+                                                                            <i class="fa fa-star-o" data-alt="1"
+                                                                                title="regular"></i>
+                                                                            <i class="fa fa-star-o" data-alt="2"
+                                                                                title="regular"></i>
+                                                                            <i class="fa fa-star-o" data-alt="3"
+                                                                                title="regular"></i>
+                                                                            <i class="fa fa-star-o" data-alt="4"
+                                                                                title="regular"></i>
+                                                                            <i class="fa fa-star-o" data-alt="5"
+                                                                                title="regular"></i>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="comment-form-author">
                                                             <label>Name <span class="required">*</span></label>
                                                             <input type="text" aria-required="true" size="30"
-                                                                value="" name="author" id="author">
+                                                                value="@isset($user){{ $user->firstname . ' ' . $user->lastname }} @endisset"
+                                                                name="author" id="author">
                                                         </div>
                                                         <div class="comment-form-email">
                                                             <label>Email <span class="required">*</span></label>
                                                             <input type="text" aria-required="true" size="30"
-                                                                value="" name="email" id="email">
+                                                                value="@isset($user){{ $user->email }}@endisset"
+                                                                name="email" id="email">
+                                                            <input type="hidden" aria-required="true" size="30"
+                                                                value="@isset($user){{ $foods->id }}@endisset"
+                                                                name="foodId" id="foodId">
                                                         </div>
                                                         <div class="comment-form-comment">
                                                             <label>Your Review</label>
-                                                            <textarea aria-required="true" rows="8" cols="45" name="comment" id="comment"></textarea>
+                                                            <textarea aria-required="true" rows="8" cols="45" name="feedback" id="feedback"></textarea>
                                                         </div>
                                                         <div class="form-submit">
                                                             <input type="submit" value="Submit" class="btn"
@@ -324,4 +327,56 @@
         </div>
     </div>
     <!-- Content END -->
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#stars .rating-bx i').on('mouseover', function() {
+                var onStar = parseInt($(this).data('alt'), 10); // Get the hovered star value
+
+                // Highlight all stars up to the hovered one
+                $(this).parent().children('i').each(function(index) {
+                    if (index < onStar) {
+                        $(this).addClass('fa-star');
+                        $(this).removeClass('fa-star-o');
+                    } else {
+                        $(this).removeClass('fa-star');
+                        $(this).addClass('fa-star-o');
+                    }
+                });
+                $(this).parent(".rating-bx").attr('data-rating', onStar);
+            });
+
+            $(".comment-form").on("submit", function(e) {
+                e.preventDefault();
+
+                let author = $("#author").val();
+                let email = $("#email").val();
+                let foodId = $("#foodId").val();
+                let feedback = $("#feedback").val();
+                var rating = parseInt($("#stars .rating-bx").data('rating'), 10);
+                alert(rating);
+
+                $.ajax({
+                    url: '/add-rating',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        author: author,
+                        email: email,
+                        foodId: foodId,
+                        feedback: feedback,
+                        rating: rating,
+                    }),
+                    success: function(response) {
+                        console.log(response)
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseJSON.message);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

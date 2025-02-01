@@ -35,7 +35,8 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'customer'])) {
             return redirect()->route('home');
         } else {
-            return back()->withErrors('error', 'Incorrect email or password ');
+            flash()->error('Incorrect email or password.');
+            return back()->withErrors('error', 'Incorrect email or password.');
         }
     }
 

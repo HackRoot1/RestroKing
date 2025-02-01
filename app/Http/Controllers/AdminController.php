@@ -29,6 +29,7 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
+        flash()->success('Item added to cart Successfully');
         return redirect()->back()->with('error', 'Login credentials failed');
     }
 

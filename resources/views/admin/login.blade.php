@@ -42,6 +42,7 @@
 
 <body class="authentication-bg">
 
+    @include('layouts.popups')
     <div class="account-pages py-5">
         <div class="container">
             <div class="row justify-content-center">
