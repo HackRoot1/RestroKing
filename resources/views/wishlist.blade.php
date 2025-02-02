@@ -27,7 +27,12 @@
                                     @forelse ($wishlists as $item)
                                         <tr class="alert">
                                             <td class="product-item-img">
-                                                <img src="images/product/thumb/item1.jpg" alt="">
+                                                @if ($item->foodslist->image->image)
+                                                    <img src="{{ asset('/images/foods/thumb/' . $item->foodslist->image->image) }}"
+                                                        alt="">
+                                                @else
+                                                    <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                                @endif
                                             </td>
                                             <td class="product-item-name">{{ $item->foodslist->name }}</td>
                                             <td class="product-item-price">${{ $item->foodslist->price }}</td>
@@ -42,8 +47,10 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td class="text-center py-5" colspan="5">You Don't have any Wishlist Items yet.
-                                                <a href="{{ route('shop.view') }}">Go to Shop</a></td>
+                                            <td class="text-center py-5" colspan="5">You Don't have any Wishlist Items
+                                                yet.
+                                                <a href="{{ route('shop.view') }}">Go to Shop</a>
+                                            </td>
                                         </tr>
                                     @endforelse
 

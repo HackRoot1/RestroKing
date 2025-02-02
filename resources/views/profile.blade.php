@@ -19,6 +19,13 @@
                                 <h3 class="m-b5">Profile Summary</h3>
                                 <ul class="py-4 no-margin">
                                     <li class="icon-bx-wraper left m-b30">
+                                        @isset($user->userImage->image)
+                                            <img src="{{ asset('/images/user/' . $user->userImage->image) }}" alt="">
+                                        @else
+                                            <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                        @endisset
+                                    </li>
+                                    <li class="icon-bx-wraper left m-b30">
                                         <div class="icon-bx-xs border-1 text-primary"> <a href="javascript:void(0);"
                                                 class="icon-cell"><i class="ti-user"></i></a> </div>
                                         <div class="icon-content">

@@ -17,11 +17,19 @@
                             <div class="product-gallery on-show-slider lightgallery" id="lightgallery">
                                 <div class="dlab-box">
                                     <div class="dlab-thum-bx">
-                                        <img src="{{ asset('images/product/item2.jpg') }}" alt="">
-                                        <span data-exthumbimage="{{ asset('images/product/item2.jpg') }}"
-                                            data-src="{{ asset('images/product/item2.jpg') }}" class="check-km"
-                                            title="Image 1 Title will come here">
-                                            <i class="fa fa-search"></i>
+                                        @if ($foods->image->image)
+                                            <img src="{{ asset('/images/foods/' . $foods->image->image) }}" alt="">
+                                            <span data-exthumbimage="{{ asset('/images/foods/' . $foods->image->image) }}"
+                                                data-src="{{ asset('/images/foods/' . $foods->image->image) }}"
+                                                class="check-km" title="Image 1 Title will come here">
+                                                <i class="fa fa-search"></i>
+                                            @else
+                                                <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                                <span data-exthumbimage="{{ asset('images/product/item2.jpg') }}"
+                                                    data-src="{{ asset('images/product/item2.jpg') }}" class="check-km"
+                                                    title="Image 1 Title will come here">
+                                                    <i class="fa fa-search"></i>
+                                        @endif
                                         </span>
                                     </div>
                                 </div>
@@ -244,7 +252,12 @@
                             <div class="item">
                                 <div class="item-box shop-item">
                                     <div class="item-img">
-                                        <img src="{{ asset('images/product/item2.jpg') }}" alt="">
+                                        @if ($food->image->image)
+                                            <img src="{{ asset('/images/foods/' . $food->image->image) }}"
+                                                alt="">
+                                        @else
+                                            <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                        @endif
                                         <span class="sale">Sale!</span>
                                         <div class="price">
                                             <del>$25.00</del> $35.00

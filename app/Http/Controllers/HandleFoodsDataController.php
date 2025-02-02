@@ -65,8 +65,6 @@ class HandleFoodsDataController extends Controller
         $food->badge = $request->badge;
         $food->save();
 
-        
-
         if ($request->hasFile('foodImage')) {
 
             // checking if already image available or not 

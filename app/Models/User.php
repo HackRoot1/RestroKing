@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function userImage() {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

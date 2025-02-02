@@ -31,7 +31,14 @@
                             <tbody>
                                 @forelse ($ordersList as $order)
                                     <tr>
-                                        <td><img src="images/product/item1.jpg" alt=""></td>
+                                        <td>
+                                            @if ($order->foodslist->image->image)
+                                                <img src="{{ asset('/images/foods/thumb/' . $order->foodslist->image->image) }}"
+                                                    alt="">
+                                            @else
+                                                <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                            @endif
+                                        </td>
                                         <td class="product-item-name">{{ $order->foodslist->name }}</td>
                                         <td class="product-item-price">{{ $order->total_price }}</td>
                                         <td class="product-item-quantity">{{ $order->quantity }}</td>

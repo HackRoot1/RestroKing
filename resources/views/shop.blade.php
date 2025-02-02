@@ -122,7 +122,7 @@
                                                     alt="">
                                             @else
                                                 <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
-                                            @endif
+                                            @endif 
 
                                             <span class="sale"><a href="{{ route('add.to.cart', $food->id) }}"> <i
                                                         class="ti-shopping-cart"></i></a></span>

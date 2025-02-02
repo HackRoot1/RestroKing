@@ -20,25 +20,30 @@
                         <div class="col-lg-12">
                             <div class="p-a30 border-1 max-w500 m-auto radius-sm">
                                 <div class="tab-content">
-                                    <form action="{{ route('update.profile') }}" method="POST"
-                                        class="tab-pane active">
+                                    <form action="{{ route('update.profile') }}" method="POST" class="tab-pane active" enctype="multipart/form-data">
                                         @csrf
                                         @method('POST')
                                         <h3 class="m-b5">Personal Information</h3>
-                                        <p>If you have an account with us, please <a href="{{ route('login.view') }}">log
-                                                in</a>.</p>
+                                        <div class="mb-3">
+                                            <label for="user-image" class="form-label">Profile Image</label>
+                                            <input type="file" id="user-image" value="{{ old('profileImage') }}"
+                                                name="profileImage" class="form-control">
+                                            @error('profileImage')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
                                         <div class="form-group">
                                             <label>First Name *</label>
-                                            <input name="firstname" value="{{ old('firstname', $user->firstname) }}" required=""
-                                                class="form-control" placeholder="First Name" type="text">
+                                            <input name="firstname" value="{{ old('firstname', $user->firstname) }}"
+                                                required="" class="form-control" placeholder="First Name" type="text">
                                         </div>
                                         @error('firstname')
                                             {{ $message }}
                                         @enderror
                                         <div class="form-group">
                                             <label>Last Name *</label>
-                                            <input name="lastname" value="{{ old('lastname', $user->lastname) }}" required=""
-                                                class="form-control" placeholder="Last Name" type="text">
+                                            <input name="lastname" value="{{ old('lastname', $user->lastname) }}"
+                                                required="" class="form-control" placeholder="Last Name" type="text">
                                         </div>
                                         @error('lastname')
                                             {{ $message }}
@@ -53,8 +58,9 @@
                                         @enderror
                                         <div class="form-group">
                                             <label>Contact No *</label>
-                                            <input name="contact_no" value="{{ old('contact_no', $user->contact_no) }}" required=""
-                                                class="form-control" placeholder="Your Contact No" type="contact_no">
+                                            <input name="contact_no" value="{{ old('contact_no', $user->contact_no) }}"
+                                                required="" class="form-control" placeholder="Your Contact No"
+                                                type="contact_no">
                                         </div>
                                         @error('contact_no')
                                             {{ $message }}
