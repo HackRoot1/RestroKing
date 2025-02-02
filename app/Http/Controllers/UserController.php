@@ -78,6 +78,40 @@ class UserController extends Controller
         return view('profile', compact('user'));
     }
 
+    public function updateProfileView()
+    {
+        $user = User::find(Auth::id());
+        return view('update-profile-details', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+
+        $validations = Validator::make($request->all(), [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email',
+            'contact_no' => 'required|digits:10',
+        ]);
+
+        if ($validations->fails()) {
+            return back()->withErrors($validations)->withInput();
+        }
+
+        $user = User::where('email', $request->email)->first();
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->contact_no = $request->contact_no;
+        $user->save();
+
+        if ($user) {
+            return redirect()->route('profile.view')->with('success', 'Successfully updated profile information');
+        }
+
+        return back()->with('error', 'Please fill correct Information');
+    }
+
     public function logout()
     {
         Auth::logout();

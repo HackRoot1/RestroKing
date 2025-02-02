@@ -44,7 +44,7 @@
                                     </li>
                                 </ul>
                                 <div class="m-t20">
-                                    <a href="javascript:void(0);" class="btn btn-hover">Update</a>
+                                    <a href="{{ route('update.profile.view') }}" class="btn btn-hover">Update</a>
                                 </div>
                             </div>
                         </div>
