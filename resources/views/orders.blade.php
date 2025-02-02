@@ -28,7 +28,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr class="alert">
                                     <td><img src="images/product/item1.jpg" alt=""></td>
                                     <td class="foodId" style="display: none">{{ $food->id }}</td>
                                     <td class="product-item-name">{{ $food->name }}</td>
@@ -118,7 +118,7 @@
         $(document).ready(function() {
 
             function orderSubTotal() {
-                let price = parseFloat($(".product-item-price").text());
+                let price = parseFloat($(".product-item-total").text());
                 $("#orderSubtotal").text(price);
             }
 
@@ -133,11 +133,16 @@
             orderSubTotal();
             orderTotal();
 
+            $(document).on("click", ".couponClose", function() {
+                $("#couponPrice").text("Not Applied");
+                $("#couponSection").show();
+                let subTotal = $("#orderSubtotal").text();
+                $("#orderTotal").text(subTotal);
+            });
+
             $(document).on("submit", "#shop-form", function(e) {
                 e.preventDefault();
                 let couponCode = $("#couponCode").val();
-                let originalPrice = $("#orderTotal").text();
-
                 if (couponCode != '') {
                     $.ajax({
                         url: '/checkCoupon',
@@ -147,12 +152,12 @@
                             couponCode: couponCode
                         }),
                         success: function(response) {
-                            $("#couponPrice").html("<div>" + response.message +
+                            $("#couponPrice").html("<span class='applied'>" + response.message +
                                 " <span id='couponId'>" +
                                 response
                                 .couponDiscount +
-                                "</span>%</div>");
-                            $("#couponPrice > div").addClass('applied');
+                                "</span>%</span><span class='couponClose'><i class='fa fa-times text-white'></i></span>"
+                            );
                             let subTotal = $("#orderSubtotal").text();
                             let percentPrice = parseFloat((subTotal / 100) * response
                                 .couponDiscount);
@@ -163,8 +168,6 @@
                         error: function(xhr, status, error) {
                             $("#couponError").show();
                             $("#couponPrice").text("Not Applied");
-                            alert(originalPrice);
-                            $("#orderTotal").text(originalPrice);
                             setTimeout(() => {
                                 $("#couponError").hide();
                             }, 5000);
@@ -191,36 +194,48 @@
             CheckPaymentType();
 
             $("#proceedCheckout").on("click", function() {
-                let foodId = $(".foodId").text();
-                let foodPrice = parseFloat($(".product-item-price").text());
-                let foodQuantity = parseInt($(".product-item-quantity").text());
-                let productSize = $(".product-item-size").text();
-                let productToppings = $(".product-item-toppings").text();
-                let productTotalPrice = parseInt($(".product-item-total").text());
-
                 let PaymentType = $("select[name='paymentMethod']").val();
+                let foodPrice = parseFloat($(".alert").find(".product-item-price").text());
+                let foodQuantity = parseInt($(".alert").find(".product-item-quantity").text());
+                let productSize = $(".alert").find(".product-item-size").text();
+                let productToppings = $(".alert").find(".product-item-toppings").text();
+                let productTotalPrice = parseInt($(".alert").find(".product-item-total").text());
+                let foodId = [$(".alert").find(".foodId").text()];
 
-                let orderData = {
-                    foodId: foodId[foodId],
-                    price: foodPrice[foodPrice],
-                    quantity: foodQuantity[foodQuantity],
-                    size: productSize[productSize],
-                    toppings: productToppings[productToppings],
-                    totalPrice: productTotalPrice[productTotalPrice],
+                let price = [foodPrice];
+                let quantity = [foodQuantity];
+                let size = [productSize];
+                let toppings = [productToppings];
+                let totalPrice = [productTotalPrice];
+
+
+                if (foodId == '') {
+                    alert("Please shop some food");
+                    return
                 }
 
-                // if coupon is applied 
+                let orderData = {
+                    foodId: foodId,
+                    price: price,
+                    quantity: quantity,
+                    size: size,
+                    toppings: toppings,
+                    totalPrice: totalPrice,
+                }
+
                 let couponId = parseFloat($("#couponId").text()) || 0;
                 if (couponId != 0) {
                     orderData.couponId = couponId;
                 }
 
+                let orderSubTotal = $("#orderSubtotal").text();
+                let orderTotal = $("#orderTotal").text();
+                orderData.orderSubTotal = orderSubTotal;
+                orderData.orderTotal = orderTotal;
+
                 if (PaymentType == 'POD') {
                     // Proceed further 
-                    let orderSubTotal = $("#orderSubtotal").text();
-                    let orderTotal = $("#orderTotal").text();
-                    orderData.orderSubTotal = orderSubTotal;
-                    orderData.orderTotal = orderTotal;
+                    console.log(orderData);
                     orderData.paymentType = PaymentType;
                     makeOrder(orderData);
 
@@ -229,14 +244,14 @@
                     let cvv = $("#credit-card-verification").val();
                     if (creditCardNumber != '' && cvv != '') {
                         // proceed further 
-                        let orderSubTotal = $("#orderSubtotal").text();
-                        let orderTotal = $("#orderTotal").text();
+                        // let orderSubTotal = $("#orderSubtotal").text();
+                        // let orderTotal = $("#orderTotal").text();
+                        // orderData.orderSubTotal = orderSubTotal;
+                        // orderData.orderTotal = orderTotal;
+
+                        orderData.paymentType = PaymentType;
                         orderData.creditCardNumber = creditCardNumber;
                         orderData.cvv = cvv;
-                        orderData.orderSubTotal = orderSubTotal;
-                        orderData.orderTotal = orderTotal;
-                        orderData.paymentType = PaymentType;
-                        console.log(orderData);
                         makeOrder(orderData);
                     } else {
                         alert("Fill Card details");
@@ -249,14 +264,16 @@
                     url: '/makeOrder',
                     type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify({
-                        orderData: orderData
-                    }),
+                    data: JSON.stringify(
+                        orderData
+                    ),
                     success: function(response) {
-                        location.href = '/orders-list';
+                        console.log(response);
+                        // location.href = '/orders-list';
                     },
                     error: function(xhr, status, error) {
-                        location.reload();
+                        // location.reload();
+                        console.log(xhr.responseText);
                     }
                 });
             }

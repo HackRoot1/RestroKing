@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Foods;
 use App\Models\Order;
 use App\Models\Coupon;
 use App\Models\Wishlist;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\FoodCategories;
-use App\Models\Testimonial;
 use Illuminate\Support\Facades\DB;
 use Flasher\Prime\FlasherInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ShoppingController extends Controller
 {
@@ -171,45 +173,84 @@ class ShoppingController extends Controller
     }
 
     // API Request 
+    // API Request 
     public function makeOrder(Request $request)
     {
+        // Validate incoming request
+        // $validations = Validator::make($request->all(), [
+        //     'foodId' => 'required',
+        //     'price' => 'required',
+        //     'quantity' => 'required',
+        //     'size' => 'required',
+        //     'toppings' => 'nullable|array',
+        //     'totalPrice' => 'required',
+        //     'orderSubTotal' => 'required|numeric',
+        //     'orderTotal' => 'required|numeric',
+        //     'paymentType' => 'required|string',
+        //     'couponId' => 'nullable|string',
+        //     'creditCardNumber' => 'nullable|string',
+        //     'cvv' => 'nullable|string',
+        // ]);
 
-        for ($i = 0; $i < count($request->foodId); $i++) {
+        $userId = Auth::id();
+
+        if (empty($request->foodId)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No food items selected.',
+            ], 400);
+        }
+
+        
+        $foodIds = is_array($request->foodId) ? $request->foodId : [$request->foodId];
+        $ordersCreated = [];
+        
+        foreach ($foodIds as $index => $foodId) {
             $order = new Order();
-            $order->user_id = Auth::user()->id;
-            $order->food_id = $request->foodId[$i];
-            $order->quantity = $request->quantity[$i];
-            $order->size = $request->size[$i];
-            $order->toppings = $request->toppings[$i];
-            $order->total_price = $request->totalPrice[$i];
-            $order->itemPrice = $request->price[$i];
+            $order->user_id = $userId;
+            $order->food_id = $foodId;
+            $order->quantity = $request->quantity[$index];
+            $order->size = $request->size[$index];
+            $order->toppings = $request->toppings[$index] ?? null;
+            $order->total_price = $request->totalPrice[$index];
+            $order->itemPrice = $request->price[$index];
             $order->subTotalOrderPrice = $request->orderSubTotal;
             $order->totalOrderPrice = $request->orderTotal;
             $order->paymentType = $request->paymentType;
-            $order->couponDiscount = $request->couponId;
+            $order->couponDiscount = $request->couponId ?? null;
 
-            if (isset($request->creditCardNumber)) {
+            // Add card info if payment type is card
+            if ($request->paymentType === 'card' && isset($request->creditCardNumber)) {
                 $order->cardNumber = $request->creditCardNumber;
                 $order->cardVerificationNumber = $request->cvv;
             }
 
             $order->save();
+            $ordersCreated[] = $order;
 
-            $cartItem = Cart::where('user_id', Auth::id())->where('food_id', $request->foodId[$i])->first();
-            $cartItem->delete();
+            // Remove item from cart if it exists
+            $cartItem = Cart::where('user_id', $userId)->where('food_id', $foodId)->first();
+            if ($cartItem) {
+                $cartItem->delete();
+            }
         }
 
-        if ($order) {
+        // Response based on order and coupon status
+        if (count($ordersCreated) > 0) {
+            $couponMessage = $request->couponId ? 'Coupon Applied' : 'Order placed successfully';
             return response()->json([
                 'status' => true,
-                'message' => 'Coupon Applied',
+                'message' => $couponMessage,
+                'orders' => $ordersCreated
             ], 200);
         }
+
         return response()->json([
             'status' => false,
-            'message' => 'Coupon Expired Or Not Found',
-        ], 404);
+            'message' => 'Order could not be processed. Please try again.',
+        ], 500);
     }
+
 
 
     public function addRating(Request $request)

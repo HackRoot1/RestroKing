@@ -12303,6 +12303,15 @@ td#couponPrice .applied {
     width: fit-content;
 }
 
+td#couponPrice .couponClose{
+    background-color: red;
+    border-radius: 10px;
+    color: white;
+    padding: 5px 10px;
+    width: fit-content;
+    cursor: pointer;
+}
+
 
 /* Product Item */
 .item-img{

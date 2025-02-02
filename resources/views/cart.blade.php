@@ -187,6 +187,13 @@
                 orderTotal();
             });
 
+            $(document).on("click", ".couponClose", function() {
+                $("#couponPrice").text("Not Applied");
+                $("#couponSection").show();
+                let subTotal = $("#orderSubtotal").text();
+                $("#orderTotal").text(subTotal);
+            });
+
 
             $(document).on("submit", "#shop-form", function(e) {
                 e.preventDefault();
@@ -200,9 +207,12 @@
                             couponCode: couponCode
                         }),
                         success: function(response) {
-                            $("#couponPrice").html(response.message + " <span id='couponId'>" +
+                            $("#couponPrice").html("<span class='applied'>" + response.message +
+                                " <span id='couponId'>" +
                                 response
-                                .couponDiscount + "</span>%")
+                                .couponDiscount +
+                                "</span>%</span><span class='couponClose'><i class='fa fa-times text-white'></i></span>");
+                            
                             let subTotal = $("#orderSubtotal").text();
                             let percentPrice = parseFloat((subTotal / 100) * response
                                 .couponDiscount);
@@ -300,7 +310,7 @@
                     alert("Ordered with POD")
                     // Proceed further 
                     let orderSubTotal = $("#orderSubtotal").text();
-                    let orderTotal = $("#orderSubtotal").text();
+                    let orderTotal = $("#orderTotal").text();
                     orderData.orderSubTotal = orderSubTotal;
                     orderData.orderTotal = orderTotal;
                     orderData.paymentType = PaymentType;
