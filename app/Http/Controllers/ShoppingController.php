@@ -137,7 +137,7 @@ class ShoppingController extends Controller
         return redirect()->back();
     }
 
-    public function chekoutOrderView(Request $request)
+    public function checkoutOrderView(Request $request)
     {
         $orderedFood = $request->all();
         $food = Foods::where('id', $request->food_id)->first();

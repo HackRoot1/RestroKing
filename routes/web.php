@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HandleFoodsDataController;
 use App\Http\Controllers\ShoppingController;
+use App\Http\Middleware\ValidCustomer;
 
 Route::get('/', [UserController::class, 'home'])->name('home');
 
@@ -29,8 +30,8 @@ Route::middleware('IsUserValid:customer')->group(function() {
     Route::get('/cart-delete/{id}', [ShoppingController::class, 'deleteCartItem'])->name('delete.from.cart');
     
     Route::post('/checkCoupon', [ShoppingController::class, 'checkCoupon']);
-    Route::post('/makeOrder', [ShoppingController::class, 'makeOrder']);
-    Route::post('/checkout', [ShoppingController::class, 'chekoutOrderView'])->name('chekout.order.view');
+    Route::post('/makeOrder', [ShoppingController::class, 'makeOrder'])->middleware(ValidCustomer::class);
+    Route::post('/checkout', [ShoppingController::class, 'checkoutOrderView'])->name('checkout.order.view');
     Route::get('/orders', [ShoppingController::class, 'ordersView'])->name('orders.view');
     Route::get('/orders-list', [ShoppingController::class, 'ordersListView'])->name('orders.list.view');
     Route::post('/add-rating', [ShoppingController::class, 'addRating'])->name('add.rating');

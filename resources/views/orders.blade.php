@@ -206,7 +206,6 @@
 
                 if (PaymentType == 'POD') {
                     // Proceed further 
-                    alert("Ordered with POD");
                     let orderSubTotal = $("#orderSubtotal").text();
                     let orderTotal = $("#orderTotal").text();
                     orderData.orderSubTotal = orderSubTotal;
@@ -219,7 +218,6 @@
                     let cvv = $("#credit-card-verification").val();
                     if (creditCardNumber != '' && cvv != '') {
                         // proceed further 
-                        alert("Ordered with CCT");
                         // proceed further 
                         let orderSubTotal = $("#orderSubtotal").text();
                         let orderTotal = $("#orderTotal").text();
@@ -245,15 +243,10 @@
                         orderData: orderData
                     }),
                     success: function(response) {
-                        console.log(response);
                         location.href = '/orders-list';
                     },
                     error: function(xhr, status, error) {
-                        // $("#couponError").show();
-                        // setTimeout(() => {
-                        //     $("#couponError").hide();
-                        // }, 5000);
-                        $("#couponError").html(xhr.responseJSON.message);
+                        location.reload();
                     }
                 });
             }

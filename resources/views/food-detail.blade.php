@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6 m-b30">
-                            <form method="POST" action="{{ route('chekout.order.view') }}" class="cart sticky-top">
+                            <form method="POST" action="{{ route('checkout.order.view') }}" class="cart sticky-top">
                                 @csrf
                                 @method('POST')
                                 <div class="dlab-post-title">
