@@ -2859,6 +2859,14 @@ td.fc-event-container {
         > li:after {
         background-color: rgba(255, 255, 255, 0.1);
     }
+    
+    .product-item-total .btn-status {
+        padding: 5px 10px !important;
+        border: none !important;
+        outline: none !important;
+        border-radius: 5px !important;
+    }
+
 }
 
 @media only screen and (max-width: 1200px) {
@@ -3023,6 +3031,14 @@ td.fc-event-container {
     .bnr3.banner-content .title {
         font-size: 50px;
     }
+
+    .product-item-total .btn-status {
+        padding: 5px 10px !important;
+        border: none !important;
+        outline: none !important;
+        border-radius: 5px !important;
+    }
+
 }
 @media only screen and (max-width: 991px) {
     .header-style-2 .header-nav .nav > li > a {
@@ -3166,6 +3182,14 @@ td.fc-event-container {
         max-width: 150px;
         min-width: 150px;
     }
+
+    .product-item-total .btn-status {
+        padding: 5px 10px !important;
+        border: none !important;
+        outline: none !important;
+        border-radius: 5px !important;
+    }
+
     .product-item-size > select,
     .product-item-toppings > select {
         color: black;

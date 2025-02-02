@@ -23,7 +23,8 @@
                                     <th>PRICE</th>
                                     <th>QUANTITY</th>
                                     <th>TOTAL</th>
-                                    <th>STATUS</th>
+                                    <th>ORDER STATUS</th>
+                                    <th>PAYMENT STATUS</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -32,12 +33,18 @@
                                     <tr>
                                         <td><img src="images/product/item1.jpg" alt=""></td>
                                         <td class="product-item-name">{{ $order->foodslist->name }}</td>
-                                        <td class="product-item-price">{{ $order->price }}</td>
+                                        <td class="product-item-price">{{ $order->total_price }}</td>
                                         <td class="product-item-quantity">{{ $order->quantity }}</td>
-                                        <td class="product-item-total">{{ $order->total_price }}</td>
-                                        <td class="product-item-total">Ordered</td>
-                                        <td class="product-item-total"><button class="btn btnhover"> Re Order</button>
-                                            <button class="btn btnhover">Cancel</button></td>
+                                        <td class="product-item-total">{{ $order->totalOrderPrice }}</td>
+                                        <td class="product-item-total"><button
+                                                class="btn-status btn-success">Ordered</button></td>
+                                        <td class="product-item-total">
+                                            <div class="btn btn-status btn-danger">Pending</div>
+                                        </td>
+                                        <td class="product-item-total">
+                                            <button class="btn-status">View</button>
+                                            <button class="btn-status btn-danger">Cancel</button>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>

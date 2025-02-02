@@ -61,8 +61,8 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td class="text-center py-5" colspan="8">You Don't have any Cart Items yet. <a
-                                                    href="{{ route('shop.view') }}">Go to Shop</a></td>
+                                            <td class="text-center py-5" colspan="8">You Don't have any Cart Items yet.
+                                                <a href="{{ route('shop.view') }}">Go to Shop</a></td>
                                         </tr>
                                     @endforelse
 
@@ -270,6 +270,10 @@
                     totalPrice.push(productTotalPrice);
                 });
 
+                if (foodId == '') {
+                    alert("Please shop some food");
+                    return
+                }
 
                 let orderData = {
                     foodId: foodId,
