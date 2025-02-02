@@ -14,8 +14,6 @@
                     <div class="col-xl-3 col-lg-4 col-md-5 m-b30">
                         <aside class="side-bar shop-categories sticky-top">
                             <form action="{{ route('shop.view') }}" method="GET">
-                                @csrf
-                                @method('GET')
                                 <div class="dlab-accordion advanced-search toggle" id="accordion1">
                                     <div class="panel">
                                         <div class="acod-head">
@@ -31,7 +29,9 @@
                                                     @foreach ($foodsCategories as $foodsCategory)
                                                         <div class="search-content">
                                                             <input type="checkbox" id="{{ $foodsCategory->food_category }}"
-                                                                name="foodCategory[]" value="{{ $foodsCategory->id }}">
+                                                                name="foodCategory[]"
+                                                                {{ in_array($foodsCategory->id, request('foodCategory', [])) ? 'checked' : '' }}
+                                                                value="{{ $foodsCategory->id }}">
                                                             <label for="{{ $foodsCategory->food_category }}"
                                                                 class="search-content-area">
                                                                 <span>{{ $foodsCategory->food_category }}</span>
@@ -54,19 +54,19 @@
                                             <div class="acod-content">
                                                 <div class="product-brand">
                                                     <div class="search-content">
-                                                        <input id="price-range-0-200" name="priceRange" value="200"
+                                                        <input id="price-range-0-200" name="priceRange" value="200" {{ request('priceRange') == '200' ? 'checked' : '' }}
                                                             type="radio">
                                                         <label for="price-range-0-200" class="search-content-area">0 -
                                                             200</label>
                                                     </div>
                                                     <div class="search-content">
-                                                        <input id="price-range-200-400" name="priceRange" value="400"
+                                                        <input id="price-range-200-400" name="priceRange" value="400" {{ request('priceRange') == '400' ? 'checked' : '' }}
                                                             type="radio">
                                                         <label for="price-range-200-400" class="search-content-area">200 -
                                                             400</label>
                                                     </div>
                                                     <div class="search-content">
-                                                        <input id="price-range-above-400" name="priceRange" value="401"
+                                                        <input id="price-range-above-400" name="priceRange" value="401" {{ request('priceRange') == '401' ? 'checked' : '' }}
                                                             type="radio">
                                                         <label for="price-range-above-400" class="search-content-area">Above
                                                             400</label>
@@ -122,7 +122,7 @@
                                                     alt="">
                                             @else
                                                 <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
-                                            @endif 
+                                            @endif
 
                                             <span class="sale"><a href="{{ route('add.to.cart', $food->id) }}"> <i
                                                         class="ti-shopping-cart"></i></a></span>

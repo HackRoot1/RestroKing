@@ -35,7 +35,6 @@ class ShoppingController extends Controller
         }
         $foods = $foods->with('categories')->with('image')->paginate(9);
         $foodsCategories = FoodCategories::get();
-        // dd($foods);
         return view('shop', ['foods' => $foods, 'foodsCategories' => $foodsCategories]);
     }
 
