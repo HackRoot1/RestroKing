@@ -65,13 +65,15 @@
                                         class="form-control" placeholder="Card Verification Number">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" id="couponCode" class="form-control"
-                                    placeholder="Coupon Code (Optional)">
-                                <span id="couponError" style="display: none"></span>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btnhover" type="submit">Apply Coupon</button>
+                            <div id="couponSection">
+                                <div class="form-group">
+                                    <input type="text" id="couponCode" class="form-control"
+                                        placeholder="Coupon Code (Optional)">
+                                    <span id="couponError" style="display: none"></span>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btnhover" type="submit">Apply Coupon</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -134,6 +136,8 @@
             $(document).on("submit", "#shop-form", function(e) {
                 e.preventDefault();
                 let couponCode = $("#couponCode").val();
+                let originalPrice = $("#orderTotal").text();
+
                 if (couponCode != '') {
                     $.ajax({
                         url: '/checkCoupon',
@@ -143,17 +147,24 @@
                             couponCode: couponCode
                         }),
                         success: function(response) {
-                            $("#couponPrice").html(response.message + " <span id='couponId'>" +
+                            $("#couponPrice").html("<div>" + response.message +
+                                " <span id='couponId'>" +
                                 response
-                                .couponDiscount + "</span>%")
+                                .couponDiscount +
+                                "</span>%</div>");
+                            $("#couponPrice > div").addClass('applied');
                             let subTotal = $("#orderSubtotal").text();
                             let percentPrice = parseFloat((subTotal / 100) * response
                                 .couponDiscount);
                             let total = parseFloat(subTotal - percentPrice);
                             $("#orderTotal").text(total);
+                            $("#couponSection").hide();
                         },
                         error: function(xhr, status, error) {
                             $("#couponError").show();
+                            $("#couponPrice").text("Not Applied");
+                            alert(originalPrice);
+                            $("#orderTotal").text(originalPrice);
                             setTimeout(() => {
                                 $("#couponError").hide();
                             }, 5000);
@@ -217,7 +228,6 @@
                     let creditCardNumber = $("#credit-card-number").val();
                     let cvv = $("#credit-card-verification").val();
                     if (creditCardNumber != '' && cvv != '') {
-                        // proceed further 
                         // proceed further 
                         let orderSubTotal = $("#orderSubtotal").text();
                         let orderTotal = $("#orderTotal").text();

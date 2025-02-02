@@ -54,19 +54,22 @@
                                             <div class="acod-content">
                                                 <div class="product-brand">
                                                     <div class="search-content">
-                                                        <input id="price-range-0-200" name="priceRange" value="200" {{ request('priceRange') == '200' ? 'checked' : '' }}
+                                                        <input id="price-range-0-200" name="priceRange" value="200"
+                                                            {{ request('priceRange') == '200' ? 'checked' : '' }}
                                                             type="radio">
                                                         <label for="price-range-0-200" class="search-content-area">0 -
                                                             200</label>
                                                     </div>
                                                     <div class="search-content">
-                                                        <input id="price-range-200-400" name="priceRange" value="400" {{ request('priceRange') == '400' ? 'checked' : '' }}
+                                                        <input id="price-range-200-400" name="priceRange" value="400"
+                                                            {{ request('priceRange') == '400' ? 'checked' : '' }}
                                                             type="radio">
                                                         <label for="price-range-200-400" class="search-content-area">200 -
                                                             400</label>
                                                     </div>
                                                     <div class="search-content">
-                                                        <input id="price-range-above-400" name="priceRange" value="401" {{ request('priceRange') == '401' ? 'checked' : '' }}
+                                                        <input id="price-range-above-400" name="priceRange" value="401"
+                                                            {{ request('priceRange') == '401' ? 'checked' : '' }}
                                                             type="radio">
                                                         <label for="price-range-above-400" class="search-content-area">Above
                                                             400</label>
@@ -113,7 +116,7 @@
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <div class="row">
-                            @foreach ($foods as $food)
+                            @forelse ($foods as $food)
                                 <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
                                     <div class="item-box shop-item style2">
                                         <div class="item-img">
@@ -145,7 +148,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
+                                    Sorry, There are no food items.
+                                </div>
+                            @endforelse
                         </div>
                         {{ $foods->links('pagination::bootstrap-5') }}
                     </div>

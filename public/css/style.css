@@ -12247,6 +12247,8 @@ ol.commentlist li .star-rating {
 	font-weight:500;
 	color:#a3a3a3;
 }
+
+
 .shop-form textarea{
 	height:150px;
 }
@@ -12291,6 +12293,17 @@ border: 0;
 .table td, .table th{
     border-color:#999;
 }
+
+
+td#couponPrice .applied {
+    background-color: green;
+    border-radius: 10px;
+    color: white;
+    padding: 5px 10px;
+    width: fit-content;
+}
+
+
 /* Product Item */
 .item-img{
 	overflow:hidden;

@@ -30,7 +30,12 @@
                                     @forelse ($cartItems as $item)
                                         <tr class="alert">
                                             <td class="product-item-img">
-                                                p
+                                                @if ($item->foodslist->image->image)
+                                                    <img src="{{ asset('/images/foods/thumb/' . $item->foodslist->image->image) }}"
+                                                        alt="">
+                                                @else
+                                                    <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                                @endif
                                             </td>
                                             <td class="foodId" style="display: none">{{ $item->foodslist->id }}</td>
                                             <td class="product-item-name">{{ $item->foodslist->name }}</td>
@@ -206,6 +211,7 @@
                         },
                         error: function(xhr, status, error) {
                             $("#couponError").show();
+                            $("#couponPrice").text("Not Applied");
                             setTimeout(() => {
                                 $("#couponError").hide();
                             }, 5000);
