@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\ValidCustomer;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\HandleFoodsDataController;
+use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\ShoppingController;
-use App\Http\Middleware\ValidCustomer;
+use App\Http\Controllers\HandleFoodsDataController;
 
 Route::get('/', [UserController::class, 'home'])->name('home');
 
@@ -20,7 +21,7 @@ Route::get('/shop/{category?}', [ShoppingController::class, 'shopView'])->name('
 Route::get('/food/{slug}', [ShoppingController::class, 'foodDetail'])->name('food.detail.view');
 Route::get('/menu', [ShoppingController::class, 'menuView'])->name('menu.view');
 
-Route::middleware('IsUserValid:customer')->group(function() {
+Route::middleware('IsUserValid:customer')->group(function () {
     Route::get('/profile', [UserController::class, 'profileView'])->name('profile.view');
     Route::get('/update-profile', [UserController::class, 'updateProfileView'])->name('update.profile.view');
     Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update.profile');
@@ -31,13 +32,17 @@ Route::middleware('IsUserValid:customer')->group(function() {
     Route::get('/wishlist-delete/{id}', [ShoppingController::class, 'deleteWishlistItem'])->name('delete.from.wishlist');
     Route::get('/cart/{id}', [ShoppingController::class, 'addToCart'])->name('add.to.cart');
     Route::get('/cart-delete/{id}', [ShoppingController::class, 'deleteCartItem'])->name('delete.from.cart');
-    
+
     Route::post('/checkCoupon', [ShoppingController::class, 'checkCoupon']);
     Route::post('/makeOrder', [ShoppingController::class, 'makeOrder'])->middleware(ValidCustomer::class);
     Route::post('/checkout', [ShoppingController::class, 'checkoutOrderView'])->name('checkout.order.view');
     Route::get('/orders', [ShoppingController::class, 'ordersView'])->name('orders.view');
     Route::get('/orders-list', [ShoppingController::class, 'ordersListView'])->name('orders.list.view');
     Route::post('/add-rating', [ShoppingController::class, 'addRating'])->name('add.rating');
+
+    // RazorpayAPIs
+    Route::post('/api/checkout', [RazorpayController::class, 'checkout']);
+    Route::post('/payment/verify', [RazorpayController::class, 'verifyPayment'])->name('payment.verify');
 });
 
 // admin side routes
@@ -46,12 +51,12 @@ Route::prefix('admin')->group(function () {
     // login
     Route::get('/login', [AdminController::class, 'viewLogin'])->name('admin.login.view');
     Route::get('/login-admin', [AdminController::class, 'loginAuth'])->name('admin.login.auth');
-    
+
     Route::middleware('IsAdminValid:admin')->group(function () {
         // dashboard
         Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
         Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-        
+
         // Customers Data
         Route::get('/view-customers', [HandleFoodsDataController::class, 'viewCustomers'])->name('view.customers');
 
@@ -62,7 +67,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-food', [HandleFoodsDataController::class, 'deleteFood'])->name('delete.food');
         Route::get('/update-food/{id}', [HandleFoodsDataController::class, 'showUpdateFood'])->name('update.food.view');
         Route::put('/update-food', [HandleFoodsDataController::class, 'updateFood'])->name('update.food');
-        
+
         // Manage Food Category
         Route::get('/add-food-category', [HandleFoodsDataController::class, 'addFoodCategoryDataView'])->name('add.food.category.view');
         Route::post('/store-food-category', [HandleFoodsDataController::class, 'storeFoodCategoryDataView'])->name('store.food.category');

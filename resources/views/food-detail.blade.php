@@ -144,95 +144,101 @@
                                                 @foreach ($foods->ratings as $rating)
                                                     <li class="comment">
                                                         <div class="comment_container">
-                                                            <img class="avatar avatar-60 photo"
-                                                                src="{{ asset('images/testimonials/pic1.jpg') }}"
-                                                                alt="">
-                                                            <div class="comment-text">
-                                                                <div class="star-rating">
-                                                                    <div data-rating="3" class="rating-bx">
-                                                                        @for ($r = 1; $r <= $rating->rating; $r++)
-                                                                            <i class="fa fa-star"
-                                                                                data-alt="{{ $r }}"
-                                                                                title="regular"></i>
-                                                                        @endfor
+                                                            @if ($rating->user->userImage->image)
+                                                                <img class="avatar avatar-60 photo"
+                                                                    src="{{ asset('/images/user/thumb/' . $rating->user->userImage->image) }}"
+                                                                    alt="">
+                                                            @else
+                                                                <img class="avatar avatar-60 photo"
+                                                                    src="{{ asset('images/testimonials/pic1.jpg') }}"
+                                                                    alt="">
+                                                            @endif
+                                                        </div>
+                                                        <div class="comment-text">
+                                                            <div class="star-rating">
+                                                                <div data-rating="3" class="rating-bx">
+                                                                    @for ($r = 1; $r <= $rating->rating; $r++)
+                                                                        <i class="fa fa-star"
+                                                                            data-alt="{{ $r }}"
+                                                                            title="regular"></i>
+                                                                    @endfor
 
-                                                                        @for ($nr = $rating->rating; $nr < 5; $nr++)
-                                                                            <i class="fa fa-star-o"
-                                                                                data-alt="{{ $nr }}"
-                                                                                title="regular"></i>
-                                                                        @endfor
-                                                                    </div>
-                                                                </div>
-                                                                <p class="meta">
-                                                                    <strong
-                                                                        class="author">{{ $rating->user->firstname }}</strong>
-                                                                    <span>{{ $rating->updated_at }}</span>
-                                                                </p>
-                                                                <div class="description">
-                                                                    <p>{{ $rating->testimonial }}</p>
+                                                                    @for ($nr = $rating->rating; $nr < 5; $nr++)
+                                                                        <i class="fa fa-star-o"
+                                                                            data-alt="{{ $nr }}"
+                                                                            title="regular"></i>
+                                                                    @endfor
                                                                 </div>
                                                             </div>
+                                                            <p class="meta">
+                                                                <strong
+                                                                    class="author">{{ $rating->user->firstname }}</strong>
+                                                                <span>{{ $rating->updated_at }}</span>
+                                                            </p>
+                                                            <div class="description">
+                                                                <p>{{ $rating->testimonial }}</p>
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                @endforeach
-                                            </ol>
                                         </div>
-                                        <div id="review_form_wrapper">
-                                            <div id="review_form">
-                                                <div id="respond" class="comment-respond">
-                                                    <h3 class="comment-reply-title" id="reply-title">Add a review</h3>
-                                                    <p>Your email address will not be published. Required fields are marked
-                                                        *</p>
-                                                    <form class="comment-form" method="post"
-                                                        action="{{ route('add.rating') }}">
-                                                        <div class="comment-form-rating">
-                                                            <label class="pull-left m-r20">Your Rating</label>
-                                                            <div class="rating-widget">
-                                                                <!-- Rating Stars Box -->
-                                                                <div class="rating-stars">
-                                                                    <div class="star-rating" id="stars">
-                                                                        <div data-rating="0" class="rating-bx">
-                                                                            <i class="fa fa-star-o" data-alt="1"
-                                                                                title="regular"></i>
-                                                                            <i class="fa fa-star-o" data-alt="2"
-                                                                                title="regular"></i>
-                                                                            <i class="fa fa-star-o" data-alt="3"
-                                                                                title="regular"></i>
-                                                                            <i class="fa fa-star-o" data-alt="4"
-                                                                                title="regular"></i>
-                                                                            <i class="fa fa-star-o" data-alt="5"
-                                                                                title="regular"></i>
-                                                                        </div>
+                                        </li>
+                                        @endforeach
+                                        </ol>
+                                    </div>
+                                    <div id="review_form_wrapper">
+                                        <div id="review_form">
+                                            <div id="respond" class="comment-respond">
+                                                <h3 class="comment-reply-title" id="reply-title">Add a review</h3>
+                                                <p>Your email address will not be published. Required fields are marked
+                                                    *</p>
+                                                <form class="comment-form" method="post"
+                                                    action="{{ route('add.rating') }}">
+                                                    <div class="comment-form-rating">
+                                                        <label class="pull-left m-r20">Your Rating</label>
+                                                        <div class="rating-widget">
+                                                            <!-- Rating Stars Box -->
+                                                            <div class="rating-stars">
+                                                                <div class="star-rating" id="stars">
+                                                                    <div data-rating="0" class="rating-bx">
+                                                                        <i class="fa fa-star-o" data-alt="1"
+                                                                            title="regular"></i>
+                                                                        <i class="fa fa-star-o" data-alt="2"
+                                                                            title="regular"></i>
+                                                                        <i class="fa fa-star-o" data-alt="3"
+                                                                            title="regular"></i>
+                                                                        <i class="fa fa-star-o" data-alt="4"
+                                                                            title="regular"></i>
+                                                                        <i class="fa fa-star-o" data-alt="5"
+                                                                            title="regular"></i>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="comment-form-author">
-                                                            <label>Name <span class="required">*</span></label>
-                                                            <input type="text" aria-required="true" size="30"
-                                                                value="@isset($user){{ $user->firstname . ' ' . $user->lastname }} @endisset"
-                                                                name="author" id="author">
-                                                        </div>
-                                                        <div class="comment-form-email">
-                                                            <label>Email <span class="required">*</span></label>
-                                                            <input type="text" aria-required="true" size="30"
-                                                                value="@isset($user){{ $user->email }}@endisset"
-                                                                name="email" id="email">
-                                                            <input type="hidden" aria-required="true" size="30"
-                                                                value="@isset($user){{ $foods->id }}@endisset"
-                                                                name="foodId" id="foodId">
-                                                        </div>
-                                                        <div class="comment-form-comment">
-                                                            <label>Your Review</label>
-                                                            <textarea aria-required="true" rows="8" cols="45" name="feedback" id="feedback"></textarea>
-                                                        </div>
-                                                        <div class="form-submit">
-                                                            <input type="submit" value="Submit" class="btn"
-                                                                id="submit" name="submit">
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                    <div class="comment-form-author">
+                                                        <label>Name <span class="required">*</span></label>
+                                                        <input type="text" aria-required="true" size="30"
+                                                            value="@isset($user){{ $user->firstname . ' ' . $user->lastname }} @endisset"
+                                                            name="author" id="author">
+                                                    </div>
+                                                    <div class="comment-form-email">
+                                                        <label>Email <span class="required">*</span></label>
+                                                        <input type="text" aria-required="true" size="30"
+                                                            value="@isset($user){{ $user->email }}@endisset"
+                                                            name="email" id="email">
+                                                        <input type="hidden" aria-required="true" size="30"
+                                                            value="@isset($user){{ $foods->id }}@endisset"
+                                                            name="foodId" id="foodId">
+                                                    </div>
+                                                    <div class="comment-form-comment">
+                                                        <label>Your Review</label>
+                                                        <textarea aria-required="true" rows="8" cols="45" name="feedback" id="feedback"></textarea>
+                                                    </div>
+                                                    <div class="form-submit">
+                                                        <input type="submit" value="Submit" class="btn"
+                                                            id="submit" name="submit">
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -242,43 +248,43 @@
                     </div>
                 </div>
             </div>
-            <!-- Product details -->
-            <!-- Shop -->
-            <div class="section-full related-products content-inner bg-gray-light">
-                <div class="container">
-                    <h2 class="title">Related products</h2>
-                    <div class="products-carousel owl-carousel owl-btn-center-lr owl-btn-3">
-                        @foreach ($relatedFoods as $food)
-                            <div class="item">
-                                <div class="item-box shop-item">
-                                    <div class="item-img">
-                                        @if ($food->image->image)
-                                            <img src="{{ asset('/images/foods/' . $food->image->image) }}"
-                                                alt="">
-                                        @else
-                                            <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
-                                        @endif
-                                        <span class="sale">Sale!</span>
-                                        <div class="price">
-                                            <del>$25.00</del> $35.00
-                                        </div>
-                                    </div>
-                                    <div class="item-info text-center">
-                                        <h4 class="item-title"><a
-                                                href="{{ route('food.detail.view', $food->slug) }}">{{ $food->name }}</a>
-                                        </h4>
-                                        <a href="{{ route('add.to.cart', $food->id) }}" class="btn btnhover"><i
-                                                class="ti-shopping-cart m-r5"></i> Add To Cart</a>
+        </div>
+        <!-- Product details -->
+        <!-- Shop -->
+        <div class="section-full related-products content-inner bg-gray-light">
+            <div class="container">
+                <h2 class="title">Related products</h2>
+                <div class="products-carousel owl-carousel owl-btn-center-lr owl-btn-3">
+                    @foreach ($relatedFoods as $food)
+                        <div class="item">
+                            <div class="item-box shop-item">
+                                <div class="item-img">
+                                    @if ($food->image->image)
+                                        <img src="{{ asset('/images/foods/' . $food->image->image) }}" alt="">
+                                    @else
+                                        <img src="{{ asset('/images/product/item1.jpg') }}" alt="">
+                                    @endif
+                                    <span class="sale">Sale!</span>
+                                    <div class="price">
+                                        <del>$25.00</del> $35.00
                                     </div>
                                 </div>
+                                <div class="item-info text-center">
+                                    <h4 class="item-title"><a
+                                            href="{{ route('food.detail.view', $food->slug) }}">{{ $food->name }}</a>
+                                    </h4>
+                                    <a href="{{ route('add.to.cart', $food->id) }}" class="btn btnhover"><i
+                                            class="ti-shopping-cart m-r5"></i> Add To Cart</a>
+                                </div>
                             </div>
-                        @endforeach
+                        </div>
+                    @endforeach
 
-                    </div>
                 </div>
             </div>
-            <!-- Shop End -->
         </div>
+        <!-- Shop End -->
+    </div>
     </div>
     <!-- Content END -->
 @endsection

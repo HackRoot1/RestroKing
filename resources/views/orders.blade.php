@@ -53,8 +53,10 @@
                                 <select name="paymentMethod">
                                     <option value="CCT" selected>Credit Card Type</option>
                                     <option value="POD">Pay On Delivery</option>
+                                    <option value="UPI">Pay Using UPI</option>
                                 </select>
                             </div>
+                            <input type="hidden" id="razorpay-key" value="{{ $key }}">
                             <div class="row" id="cct-inputs">
                                 <div class="form-group col-lg-6">
                                     <input type="text" name="credit-card-number" id="credit-card-number"
@@ -182,8 +184,13 @@
                 let PaymentType = $("select[name='paymentMethod']").val();
                 if (PaymentType == 'POD') {
                     $("#cct-inputs").hide();
+                    $("#razorpay-key").hide();
+                } else if (PaymentType == 'UPI') {
+                    $("#razorpay-key").show();
+                    $("#cct-inputs").hide();
                 } else if (PaymentType == 'CCT') {
                     $("#cct-inputs").show();
+                    $("#razorpay-key").hide();
                 }
             };
 
@@ -256,6 +263,8 @@
                     } else {
                         alert("Fill Card details");
                     }
+                } else if (PaymentType == 'UPI') {
+                    razorpayOrder(orderTotal);
                 }
             });
 
@@ -269,13 +278,75 @@
                     ),
                     success: function(response) {
                         console.log(response);
-                        // location.href = '/orders-list';
+                        location.href = '/orders-list';
                     },
                     error: function(xhr, status, error) {
-                        // location.reload();
+                        location.reload();
                         console.log(xhr.responseText);
                     }
                 });
+            }
+
+
+
+            // Razorpay Order 
+            // payment related API
+            async function razorpayOrder(totalAmount) {
+                try {
+                    // Create Razorpay Order
+                    let orderResponse = await $.ajax({
+                        url: "/api/checkout",
+                        type: "POST",
+                        contentType: "application/json",
+
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            ),
+                        },
+                        data: JSON.stringify({
+                            totalAmount: totalAmount
+                        }),
+                    });
+
+                    console.log(orderResponse);
+
+                    // Razorpay Options
+                    var options = {
+                        key: $("#razorpay-key").val(), // Razorpay Key
+                        amount: orderResponse.amount,
+                        currency: orderResponse.currency,
+                        name: "Your name",
+                        order_id: orderResponse.order_id,
+                        handler: async function(response) {
+                            try {
+                                // Verify Payment
+                                let verifyResponse = await $.ajax({
+                                    url: "/payment/verify",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    headers: {
+                                        "X-CSRF-TOKEN": $(
+                                            'meta[name="csrf-token"]'
+                                        ).attr("content"),
+                                    },
+                                    data: JSON.stringify(response),
+                                });
+
+                                console.log(verifyResponse);
+                            } catch (err) {
+                                console.error("Payment Verification Error:", err);
+                            }
+                        },
+                    };
+
+                    var rzp = new Razorpay(options);
+                    rzp.open();
+                    // location.href = '/orders-list';
+                } catch (err) {
+                    console.error("Checkout Error:", err);
+                    alert("There was an issue processing your payment. Please try again.");
+                }
             }
         });
     </script>

@@ -43,7 +43,7 @@ class ShoppingController extends Controller
     public function foodDetail(String $slug)
     {
         $user = User::find(Auth::id());
-        $foods = Foods::where('slug', $slug)->with('ratings.user')->first();
+        $foods = Foods::where('slug', $slug)->with('ratings.user.userImage')->first();
         $relatedFoods = Foods::where('category', $foods->category)->get();
         return view('food-detail', ['foods' => $foods, 'relatedFoods' => $relatedFoods, 'user' => $user]);
     }
@@ -140,9 +140,10 @@ class ShoppingController extends Controller
 
     public function checkoutOrderView(Request $request)
     {
+        $key = env('RAZORPAY_KEY');
         $orderedFood = $request->all();
         $food = Foods::where('id', $request->food_id)->first();
-        return view('orders', compact('orderedFood', 'food'));
+        return view('orders', compact('orderedFood', 'food', 'key'));
     }
 
     public function menuView()
@@ -201,10 +202,10 @@ class ShoppingController extends Controller
             ], 400);
         }
 
-        
+
         $foodIds = is_array($request->foodId) ? $request->foodId : [$request->foodId];
         $ordersCreated = [];
-        
+
         foreach ($foodIds as $index => $foodId) {
             $order = new Order();
             $order->user_id = $userId;

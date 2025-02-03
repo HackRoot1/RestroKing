@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/templete.css') }}">
     <link class="skin" rel="stylesheet" type="text/css" href="{{ asset('css/skin/skin-2.css') }}">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 </head>
 
