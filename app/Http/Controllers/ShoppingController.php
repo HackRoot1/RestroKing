@@ -276,7 +276,8 @@ class ShoppingController extends Controller
         ], 404);
     }
 
-    public function cancelOrder(Request $request) {
+    public function cancelOrder(Request $request)
+    {
         $order = Order::find($request->orderId);
         $order->delete();
 

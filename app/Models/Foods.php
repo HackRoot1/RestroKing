@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Foods extends Model
 {
+    public $guarded = [];
+
     public function categories()
     {
         return $this->belongsTo(FoodCategories::class, 'category');
