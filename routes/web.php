@@ -43,6 +43,7 @@ Route::middleware('IsUserValid:customer')->group(function () {
     // RazorpayAPIs
     Route::post('/api/checkout', [RazorpayController::class, 'checkout']);
     Route::post('/payment/verify', [RazorpayController::class, 'verifyPayment'])->name('payment.verify');
+    Route::delete('/cancel-order', [ShoppingController::class, 'cancelOrder'])->name('cancel.order');
 });
 
 // admin side routes

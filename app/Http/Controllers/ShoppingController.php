@@ -275,4 +275,22 @@ class ShoppingController extends Controller
             'message' => 'Something Error',
         ], 404);
     }
+
+    public function cancelOrder(Request $request) {
+        $order = Order::find($request->orderId);
+        $order->delete();
+
+        if ($order) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Order cancelled successful',
+                'data' => $request->orderId
+            ], 200);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => 'Please try again',
+            'data' => $request->orderId
+        ], 404);
+    }
 }

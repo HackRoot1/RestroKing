@@ -50,7 +50,8 @@
                                         </td>
                                         <td class="product-item-total">
                                             <button class="btn-status">View</button>
-                                            <button class="btn-status btn-danger">Cancel</button>
+                                            <button class="btn-status btn-danger cancel-order"
+                                                data-orderid="{{ $order->id }}">Cancel</button>
                                         </td>
                                     </tr>
                                 @empty
@@ -69,4 +70,30 @@
 
     </div>
     <!-- Content END-->
+@endsection
+
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $(document).on("click", ".cancel-order", function() {
+                let orderId = $(this).data('orderid');
+                console.log(orderId);
+                $.ajax({
+                    url: '/cancel-order',
+                    type: 'DELETE',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ orderId : orderId }),
+                    success: function(response) {
+                        console.log(response)
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseJSON.message);
+                        console.log(xhr.responseJSON.data);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
