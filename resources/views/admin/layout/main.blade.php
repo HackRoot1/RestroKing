@@ -341,6 +341,27 @@
                         </div>
                     </li>
 
+
+                    <li class="menu-title">Orders Section</li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-arrow" href="#orders" data-bs-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="orders">
+                            <span class="nav-icon">
+                                <iconify-icon icon="mingcute:layout-line"></iconify-icon>
+                            </span>
+                            <span class="nav-text"> Orders </span>
+                        </a>
+                        <div class="collapse" id="orders">
+                            <ul class="nav sub-navbar-nav">
+                                <li class="sub-nav-item">
+                                    <a class="sub-nav-link" href="{{ route('view.orders') }}">
+                                        View Orders</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </div>

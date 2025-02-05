@@ -5,6 +5,7 @@ use App\Http\Middleware\ValidCustomer;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomersOrders;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\ShoppingController;
 use App\Http\Controllers\HandleFoodsDataController;
@@ -77,5 +78,9 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-food-categories', [HandleFoodsDataController::class, 'deleteFoodCategory'])->name('delete.food.category');
         Route::get('/update-food-category/{id}', [HandleFoodsDataController::class, 'showUpdateFoodCategory'])->name('update.food.category.view');
         Route::put('/update-food-category', [HandleFoodsDataController::class, 'updateFoodCategory'])->name('update.food.category');
+
+        // customers orders 
+        Route::get('/customers-orders', [CustomersOrders::class, 'viewOrders'])->name('view.orders'); 
+        
     });
 });
