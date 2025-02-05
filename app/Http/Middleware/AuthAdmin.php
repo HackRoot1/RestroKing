@@ -19,6 +19,6 @@ class AuthAdmin
         if (Auth::check() && Auth::user()->role === $role) {
             return $next($request);
         }
-        return redirect()->route('login.view');
+        return redirect()->route('admin.login.view');
     }
 }

@@ -51,7 +51,7 @@
                                     <td>{{ $customer->contact_no }}</td>
                                     <td>address</td>
                                     <td>
-                                        <a href="{{ route('update.food.view', $customer->id) }}"
+                                        <a href="{{ route('view.customer.details', $customer->id) }}"
                                             class="d-inline btn btn-primary btn-sm">View</a>
                                     </td>
                                 </tr>

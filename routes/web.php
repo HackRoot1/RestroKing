@@ -60,6 +60,7 @@ Route::prefix('admin')->group(function () {
 
         // Customers Data
         Route::get('/view-customers', [HandleFoodsDataController::class, 'viewCustomers'])->name('view.customers');
+        Route::get('/view-customer-details/{id}', [HandleFoodsDataController::class, 'viewCustomerDetails'])->name('view.customer.details');
 
         // Manage Foods data
         Route::get('/add-food', [HandleFoodsDataController::class, 'addFoodDataView'])->name('add.food.view');

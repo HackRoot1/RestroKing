@@ -20,7 +20,11 @@ class HandleFoodsDataController extends Controller
         $customers = User::where('role', 'customer')->get();
         return view('admin.view_customers', compact('customers'));
     }
-
+    
+    public function viewCustomerDetails(String $id) {
+        $customerDetail = User::findOrFail($id);
+        return view('admin.view_cutomer_details', compact('customerDetail'));
+    }
 
     // Food Data
     public function addFoodDataView()
