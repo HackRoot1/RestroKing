@@ -62,7 +62,7 @@
                                     <td>Pending</td>
                                     <td>address</td>
                                     <td>
-                                        <a href="{{ route('view.customer.details', $order->id) }}"
+                                        <a href="{{ route('view.order', $order->id) }}"
                                             class="d-inline btn btn-primary btn-sm">View</a>
                                     </td>
                                 </tr>

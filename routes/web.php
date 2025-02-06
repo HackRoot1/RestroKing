@@ -81,6 +81,7 @@ Route::prefix('admin')->group(function () {
 
         // customers orders 
         Route::get('/customers-orders', [CustomersOrders::class, 'viewOrders'])->name('view.orders'); 
+        Route::get('/view-customer-order/{id}', [CustomersOrders::class, 'viewOrder'])->name('view.order'); 
         
     });
 });
