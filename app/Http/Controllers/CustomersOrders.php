@@ -14,7 +14,6 @@ class CustomersOrders extends Controller
     {
         $customers = User::where('role', 'customer')->get();
         $orders = Order::with('foodslist.image')->with('userData')->get();
-        // dd($orders);
         return view('admin.view_orders', compact('orders'));
     }
 }
