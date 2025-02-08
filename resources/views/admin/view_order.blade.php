@@ -36,7 +36,8 @@
                         <div class="row">
                             <div class="mb-3 d-flex w-100">
                                 <div class="w-25">Name</div>
-                                <div class="w-50">{{ $order->userData->firstname . ' ' . $order->userData->lastname }}</div>
+                                <div class="w-50">{{ $order->userData->firstname . ' ' . $order->userData->lastname }}
+                                </div>
                             </div>
                             <div class="mb-3 d-flex w-100">
                                 <div class="w-25">Email</div>

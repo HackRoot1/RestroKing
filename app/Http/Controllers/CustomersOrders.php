@@ -16,10 +16,10 @@ class CustomersOrders extends Controller
         $orders = Order::with('foodslist.image')->with('userData')->get();
         return view('admin.view_orders', compact('orders'));
     }
-    
-    public function viewOrder(String $id) {
+
+    public function viewOrder(String $id)
+    {
         $order = Order::with('foodslist.image')->with('userData')->where('id', $id)->first();
-        // dd($order);
         return view('admin.view_order', compact('order'));
     }
 }
