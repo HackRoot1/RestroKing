@@ -24,6 +24,7 @@
                                     <th>QUANTITY</th>
                                     <th>TOTAL</th>
                                     <th>ORDER STATUS</th>
+                                    <th>PAYMENT TYPE</th>
                                     <th>PAYMENT STATUS</th>
                                     <th>Action</th>
                                 </tr>
@@ -45,6 +46,9 @@
                                         <td class="product-item-total">{{ $order->totalOrderPrice }}</td>
                                         <td class="product-item-total"><button
                                                 class="btn-status btn-success">Ordered</button></td>
+                                        <td class="product-item-total">
+                                            <div class="btn btn-status btn-danger">POD</div>
+                                        </td>
                                         <td class="product-item-total">
                                             <div class="btn btn-status btn-danger">Pending</div>
                                         </td>
