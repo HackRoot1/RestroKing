@@ -25,8 +25,7 @@
                     Food List
                 </h5>
                 <p class="card-subtitle">
-                    A list of all the users in your account including their name, title, email
-                    and role.
+                    <button id="deleteAll">Delete All</button>
                 </p>
             </div>
 
@@ -58,18 +57,17 @@
                                 <tr>
                                     <td>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
+                                            <input class="form-check-input foodItemCheckbox" type="checkbox"
+                                                value="{{ $food->id }}" id="flexCheckDefault">
                                         </div>
                                     </td>
                                     <td>
-                                    @isset($food->image->image)
-                                    <img src="{{ asset('/images/foods/thumb/' . $food->image->image) }}"
-                                        alt="" class="avatar-lg rounded-3">
-                                    @else   
-                                    <img src=""
-                                        alt="No Image" class="avatar-lg rounded-3">
-                                    @endisset
+                                        @isset($food->image->image)
+                                            <img src="{{ asset('/images/foods/thumb/' . $food->image->image) }}" alt=""
+                                                class="avatar-lg rounded-3">
+                                        @else
+                                            <img src="" alt="No Image" class="avatar-lg rounded-3">
+                                        @endisset
                                     </td>
                                     <td>{{ $food->name }}</td>
                                     <td>{{ $food->description }}</td>
@@ -99,4 +97,58 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#flexCheckDefault5").on("click", function() {
+                if ($(this).prop('checked')) {
+                    $(".foodItemCheckbox").map((index, item) => {
+                        $(item).prop('checked', true);
+                    });
+                } else {
+                    $(".foodItemCheckbox").map((index, item) => {
+                        $(item).prop('checked', false);
+                    });
+                }
+            });
+
+
+            function getAllChecked() {
+                let items = [];
+                $(".foodItemCheckbox").map((index, item) => {
+                    if ($(item).prop('checked')) {
+                        items.push($(item).val());
+                    }
+                });
+                return items;
+            }
+
+            $(".foodItemCheckbox").on("click", function() {
+                let itemsList = getAllChecked();
+            });
+
+
+            $("#deleteAll").on("click", function() {
+                let itemsList = getAllChecked();
+                console.log(itemsList);
+
+                $.ajax({
+                    url: '/admin/cancel-orders',
+                    type: 'DELETE',
+                    contentType: 'application/json',
+                    data: JSON.stringify({itemsList}),
+                    success: function(response) {
+                        console.log(response)
+                        // location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseJSON.message);
+                        console.log(xhr.responseJSON.data);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

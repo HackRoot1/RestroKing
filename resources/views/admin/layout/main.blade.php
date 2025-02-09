@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Gridjs Plugin css -->
     <link href="{{ asset('assets/vendor/gridjs/theme/mermaid.min.css') }}" rel="stylesheet" type="text/css" />
 
@@ -296,8 +296,8 @@
                     <li class="menu-title">Foods Section</li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#foodList" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="foodList">
+                        <a class="nav-link menu-arrow" href="#foodList" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="foodList">
                             <span class="nav-icon">
                                 <iconify-icon icon="mingcute:layout-line"></iconify-icon>
                             </span>
@@ -320,8 +320,8 @@
                     <li class="menu-title">Categories Section</li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#foodCategory" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="foodCategory">
+                        <a class="nav-link menu-arrow" href="#foodCategory" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="foodCategory">
                             <span class="nav-icon">
                                 <iconify-icon icon="mingcute:layout-line"></iconify-icon>
                             </span>
@@ -345,8 +345,8 @@
                     <li class="menu-title">Orders Section</li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-arrow" href="#orders" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="orders">
+                        <a class="nav-link menu-arrow" href="#orders" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="orders">
                             <span class="nav-icon">
                                 <iconify-icon icon="mingcute:layout-line"></iconify-icon>
                             </span>
@@ -404,7 +404,13 @@
 
     </div>
     <!-- END Wrapper -->
-
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('scripts')
 
     <!-- Vendor Javascript -->

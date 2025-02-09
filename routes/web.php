@@ -49,11 +49,11 @@ Route::middleware('IsUserValid:customer')->group(function () {
 
 // admin side routes
 Route::prefix('admin')->group(function () {
-
+    
     // login
     Route::get('/login', [AdminController::class, 'viewLogin'])->name('admin.login.view');
     Route::get('/login-admin', [AdminController::class, 'loginAuth'])->name('admin.login.auth');
-
+    
     Route::middleware('IsAdminValid:admin')->group(function () {
         // dashboard
         Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
@@ -62,7 +62,7 @@ Route::prefix('admin')->group(function () {
         // Customers Data
         Route::get('/view-customers', [HandleFoodsDataController::class, 'viewCustomers'])->name('view.customers');
         Route::get('/view-customer-details/{id}', [HandleFoodsDataController::class, 'viewCustomerDetails'])->name('view.customer.details');
-
+        
         // Manage Foods data
         Route::get('/add-food', [HandleFoodsDataController::class, 'addFoodDataView'])->name('add.food.view');
         Route::post('/store-food', [HandleFoodsDataController::class, 'storeFood'])->name('store.food');
@@ -78,10 +78,11 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete-food-categories', [HandleFoodsDataController::class, 'deleteFoodCategory'])->name('delete.food.category');
         Route::get('/update-food-category/{id}', [HandleFoodsDataController::class, 'showUpdateFoodCategory'])->name('update.food.category.view');
         Route::put('/update-food-category', [HandleFoodsDataController::class, 'updateFoodCategory'])->name('update.food.category');
-
+        
         // customers orders 
         Route::get('/customers-orders', [CustomersOrders::class, 'viewOrders'])->name('view.orders'); 
         Route::get('/view-customer-order/{id}', [CustomersOrders::class, 'viewOrder'])->name('view.order'); 
+        Route::delete('/cancel-orders', [CustomersOrders::class, 'cancelOrders'])->name('cancel.orders');
         
     });
 });

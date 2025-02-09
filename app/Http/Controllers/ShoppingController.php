@@ -294,4 +294,5 @@ class ShoppingController extends Controller
             'data' => $request->orderId
         ], 404);
     }
+
 }

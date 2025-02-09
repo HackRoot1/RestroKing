@@ -87,7 +87,9 @@
                     url: '/cancel-order',
                     type: 'DELETE',
                     contentType: 'application/json',
-                    data: JSON.stringify({ orderId : orderId }),
+                    data: JSON.stringify({
+                        orderId: orderId
+                    }),
                     success: function(response) {
                         console.log(response)
                         location.reload();
