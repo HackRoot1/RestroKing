@@ -120,7 +120,7 @@
                                 <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
                                     <div class="item-box shop-item style2">
                                         <div class="item-img">
-                                            @if ($food->image->image)
+                                            @if ($food->image->image != '')
                                                 <img src="{{ asset('/images/foods/' . $food->image->image) }}"
                                                     alt="">
                                             @else

@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Foods;
+use App\Mail\VerifyEmail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -56,6 +60,8 @@ class UserController extends Controller
             'password' => 'required|min:6',
         ]);
 
+        $token = Str::random(64);
+
         if ($validations->fails()) {
             return back()->withErrors($validations)->withInput();
         }
@@ -65,13 +71,31 @@ class UserController extends Controller
         $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->email_verification_token = $token;
         $user->save();
 
         if ($user) {
+            // Send Verification Email
+            Mail::to($user->email)->send(new VerifyEmail($user));
             return redirect()->route('login.view');
         } else {
             return back()->withErrors('error', 'please try again');
         }
+    }
+
+    public function verifyEmail($token)
+    {
+        $user = User::where('email_verification_token', $token)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Invalid verification token'], 400);
+        }
+
+        $user->email_verified = true;
+        $user->email_verification_token = null;
+        $user->save();
+
+        return response()->json(['message' => 'Email verified successfully.']);
     }
 
     public function profileView()

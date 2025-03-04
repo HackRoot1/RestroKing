@@ -22,6 +22,8 @@ Route::get('/shop/{category?}', [ShoppingController::class, 'shopView'])->name('
 Route::get('/food/{slug}', [ShoppingController::class, 'foodDetail'])->name('food.detail.view');
 Route::get('/menu', [ShoppingController::class, 'menuView'])->name('menu.view');
 
+Route::get('/verify-email/{token}', [UserController::class, 'verifyEmail']);
+
 Route::middleware('IsUserValid:customer')->group(function () {
     Route::get('/profile', [UserController::class, 'profileView'])->name('profile.view');
     Route::get('/update-profile', [UserController::class, 'updateProfileView'])->name('update.profile.view');

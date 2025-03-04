@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="food-image" class="form-label">Upload Sub Category Image</label>
-                                    <input type="file" id="food-image" value="{{ old('foodImage') }}" name="foodImage"
+                                    <input type="file" accept=".png, .jpg, .jpeg" id="food-image" value="{{ old('foodImage') }}" name="foodImage"
                                         class="form-control">
                                     @error('foodImage')
                                         {{ $message }}
